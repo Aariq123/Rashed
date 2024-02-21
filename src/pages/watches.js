@@ -1,0 +1,119 @@
+import { useContext, useEffect, useState } from "react";
+import { MainContext } from "../context";
+import { getDownloadURL, listAll, getStorage, ref } from "firebase/storage";
+import { Button, Card, CardMedia } from "@mui/material";
+import { collection, getDocs } from "firebase/firestore";
+import { Link } from "react-router-dom";
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+
+
+const Watches = () => {
+    const { db, addCartItem } = useContext(MainContext)
+    const [images, setImages] = useState([])
+    const [products, setProducts] = useState([])
+    const storage = getStorage();
+    const [loading, setLoading] = useState(false)
+    const [priceShort, setPriceShort] = useState('Low to high')
+
+    useEffect(() => {
+        if (products.length < 1) {
+            setLoading(true)
+            const querySnapshot = getDocs(collection(db, "watches"));
+            querySnapshot.then(docs => {
+                docs.forEach(doc => {
+                    setProducts((prev) => [...prev, { id: doc.id, data: doc.data() }])
+                })
+            }).then(() => setLoading(false))
+        }
+    }, [])
+
+
+    
+
+    useEffect(() => {
+        if (products.length > 0) {
+            if (images.length < 1) {
+                products.forEach(item => {
+                    getDownloadURL(ref(storage, `watches/${parseInt(item.id)}/images/home.jpg`)).then(res => {
+                        setImages((prev) => [...prev, {
+                            id: item.id,
+                            res
+                        }])
+                    })
+                })
+            }
+        }
+    }, [products])
+
+
+    const handleChange = (e) => {
+        setPriceShort(e.target.value)
+        if(priceShort == 'Low to high'){
+            products.sort((a,b)=>b.data.price-a.data.price)
+        }else{
+            products.sort((a,b)=>a.data.price-b.data.price)
+        }
+    }
+
+   
+
+    return (
+        <div className="m-auto container h-screen">
+            <p className="text-2xl mt-24 text-center">All watches:</p>
+            {products &&
+                <div className="my-6">
+                    <div className="flex items-center">
+                        <p className="font-bold mr-1">SHORT BY(price):</p>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={priceShort}
+                            onChange={handleChange}
+                            sx={{height:30, borderRadius:0}}
+                        >
+                            <MenuItem value={'Low to high'}>Low to high</MenuItem>
+                            <MenuItem value={'High to low'}>High to low</MenuItem>
+                        </Select>
+                    </div>
+                </div>}
+            <div className="flex mx-20 mt-12 justify-center">
+                {loading && <p className="text-2xl mt-10">Loading.....</p>}
+                {
+                    products.map((product, i) => {
+                        const { description, name, price, stock } = product.data
+
+                        console.log(stock)
+                        let img = images.filter(image => image.id == product.id)
+
+                        return (
+                            <div className="mx-4 my-6" key={product.id}>
+
+                                <Card sx={{ width: 280, height: 400, position:'relative', dropShadow: '5px 5px 3px rgba(0, 0, 0, 0.10)' }}>
+                                {stock < 1 && <div className="text-red-600 z-10 bg-white absolute top-2 left-2 px-4 text-lg">SOLD OUT</div>}
+                                    <Link to='/productpage' state={{ data: product.data, id: product.id, category:'watches' }}>
+                                        <CardMedia sx={{ height: 270, overflow: 'hidden' }} >
+                                            <img src={img.length > 0 && img[0].res}></img>
+                                        </CardMedia>
+                                    </Link>
+                                    <div className="p-2 pb-4 pt-0">
+                                        <Link to='/productpage' state={{ data: product.data, id: product.id, category:'watches' }}>
+                                            <p className="font-bold">{name}</p>
+                                            <p className="my-2">৳{price}</p>
+                                           
+                                        </Link>
+                                        <Button sx={{ backgroundColor: 'black', color: 'white' }} onClick={() => addCartItem({ id: product.id, data: product.data, image: img.length > 0 && img[0].res, quantity: 1, category:'watches' })} variant="contained">Add to cart</Button>
+                                    </div>
+                                </Card>
+
+                            </div>
+                        )
+                    })
+
+                }
+            </div>
+        </div>
+    );
+}
+
+export default Watches;

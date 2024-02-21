@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import Navbar from "./pages/navbar";
+import Home from "./pages/home";
+
+import Productpage from "./pages/productpage";
+import Contact from "./pages/contact";
+import { useContext } from 'react';
+import { MainContext } from './context';
+import Footer from "./pages/footer";
+import Cart from "./pages/cart";
+import Watches from "./pages/watches";
+import Glasses from "./pages/glasses";
+
 
 function App() {
+  const { closeMenu } = useContext(MainContext)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" onClick={(e)=>closeMenu(e)}>
+      <Navbar></Navbar>
+      <Routes>
+        <Route path="/" element={<Home></Home>}></Route>
+        <Route path="/watches" element={<Watches></Watches>}></Route>
+        <Route path="/glasses" element={<Glasses></Glasses>}></Route>
+        <Route path="/contact" element={<Contact></Contact>}></Route>
+        <Route path="/productpage" element={<Productpage></Productpage>}></Route>
+        <Route path="/cart" element={<Cart></Cart>}></Route>
+      </Routes>
+      <Footer></Footer>
     </div>
   );
 }
