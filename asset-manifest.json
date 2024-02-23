@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/rashed/static/css/main.f38cdca8.css",
-    "main.js": "/rashed/static/js/main.309937bb.js",
+    "main.css": "/rashed/static/css/main.a832a1a3.css",
+    "main.js": "/rashed/static/js/main.c99a5f12.js",
     "static/media/home.jpg": "/rashed/static/media/home.8af18f9ea9b408b2e1d5.jpg",
     "static/media/3.jpg": "/rashed/static/media/3.9514eaf405fb5ce08200.jpg",
     "static/media/1.jpg": "/rashed/static/media/1.5a2d76fdd69b65141b39.jpg",
     "static/media/2.jpg": "/rashed/static/media/2.93fdd0d21729ca49820e.jpg",
     "static/media/ligma.jpg": "/rashed/static/media/ligma.7e2d304e7f25746e3e4e.jpg",
     "index.html": "/rashed/index.html",
-    "main.f38cdca8.css.map": "/rashed/static/css/main.f38cdca8.css.map",
-    "main.309937bb.js.map": "/rashed/static/js/main.309937bb.js.map"
+    "main.a832a1a3.css.map": "/rashed/static/css/main.a832a1a3.css.map",
+    "main.c99a5f12.js.map": "/rashed/static/js/main.c99a5f12.js.map"
   },
   "entrypoints": [
-    "static/css/main.f38cdca8.css",
-    "static/js/main.309937bb.js"
+    "static/css/main.a832a1a3.css",
+    "static/js/main.c99a5f12.js"
   ]
 }
