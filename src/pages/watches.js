@@ -9,7 +9,7 @@ import Select from '@mui/material/Select';
 
 
 const Watches = () => {
-    const { db, addCartItem } = useContext(MainContext)
+    const { db, addCartItem, matches2, matches } = useContext(MainContext)
     const [images, setImages] = useState([])
     const [products, setProducts] = useState([])
     const storage = getStorage();
@@ -29,7 +29,7 @@ const Watches = () => {
     }, [])
 
 
-    
+
 
     useEffect(() => {
         if (products.length > 0) {
@@ -49,60 +49,73 @@ const Watches = () => {
 
     const handleChange = (e) => {
         setPriceShort(e.target.value)
-        if(priceShort == 'Low to high'){
-            products.sort((a,b)=>b.data.price-a.data.price)
-        }else{
-            products.sort((a,b)=>a.data.price-b.data.price)
+        if (priceShort == 'Low to high') {
+            products.sort((a, b) => b.data.price - a.data.price)
+        } else {
+            products.sort((a, b) => a.data.price - b.data.price)
         }
     }
 
-   
+
 
     return (
-        <div className="m-auto container h-screen">
-            <p className="text-2xl mt-24 text-center">All watches:</p>
+        <div className="m-auto container min-h-screen">
+            <p className="text-lg sm:text-2xl mt-24 text-center">All watches:</p>
             {products &&
                 <div className="my-6">
-                    <div className="flex items-center">
-                        <p className="font-bold mr-1">SHORT BY(price):</p>
+                    <div className="flex ml-2 sm:m-0 flex-col items-start sm:flex-row sm:items-center">
+                        <p className="text-sm sm:text-base font-bold mr-1">SHORT BY(price):</p>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             value={priceShort}
                             onChange={handleChange}
-                            sx={{height:30, borderRadius:0}}
+                            sx={{
+                                borderRadius: 0,
+                                height: matches2 ? 30 : 25,
+                                width: matches2 ? 120 : 100,
+                                fontSize: matches2 ? 14 : 12
+                            }}
                         >
                             <MenuItem value={'Low to high'}>Low to high</MenuItem>
                             <MenuItem value={'High to low'}>High to low</MenuItem>
                         </Select>
                     </div>
                 </div>}
-            <div className="flex mx-20 mt-12 justify-center">
+            <div className="flex flex-wrap  mt-12 justify-center">
                 {loading && <p className="text-2xl mt-10">Loading.....</p>}
                 {
                     products.map((product, i) => {
-                        const { description, name, price, stock } = product.data
+                        const { name, price, stock } = product.data
 
                         console.log(stock)
                         let img = images.filter(image => image.id == product.id)
 
                         return (
-                            <div className="mx-4 my-6" key={product.id}>
+                            <div className=" ml-2 sm:mx-4 my-8" key={product.id}>
 
-                                <Card sx={{ width: 280, height: 400, position:'relative', dropShadow: '5px 5px 3px rgba(0, 0, 0, 0.10)' }}>
-                                {stock < 1 && <div className="text-red-600 z-10 bg-white absolute top-2 left-2 px-4 text-lg">SOLD OUT</div>}
-                                    <Link to='/productpage' state={{ data: product.data, id: product.id, category:'watches' }}>
-                                        <CardMedia sx={{ height: 270, overflow: 'hidden' }} >
+                                <Card sx={{ width: matches2 ? 230 : 180, height: matches2 ? 400 : 300, position: 'relative', dropShadow: '5px 5px 3px rgba(0, 0, 0, 0.10)' }}>
+                                    {stock < 1 && <div className="text-red-600 z-10 bg-white absolute top-2 left-2 px-4 sm:text-lg">SOLD OUT</div>}
+                                    <Link to='/productpage' state={{ data: product.data, id: product.id, category: 'watches' }}>
+                                        <CardMedia sx={{ height: matches2 ? 270 : 200, overflow: 'hidden' }} >
                                             <img src={img.length > 0 && img[0].res}></img>
                                         </CardMedia>
                                     </Link>
                                     <div className="p-2 pb-4 pt-0">
-                                        <Link to='/productpage' state={{ data: product.data, id: product.id, category:'watches' }}>
-                                            <p className="font-bold">{name}</p>
-                                            <p className="my-2">৳{price}</p>
-                                           
+                                        <Link to='/productpage' state={{ data: product.data, id: product.id, category: 'watches' }}>
+                                            <p className="text-sm sm: text-base font-bold">{name}</p>
+                                            <p className="text-sm sm: text-base my-2">৳{price}</p>
+
                                         </Link>
-                                        <Button sx={{ backgroundColor: 'black', color: 'white' }} onClick={() => addCartItem({ id: product.id, data: product.data, image: img.length > 0 && img[0].res, quantity: 1, category:'watches' })} variant="contained">Add to cart</Button>
+                                        <Button sx={{
+                                            backgroundColor: 'black',
+                                            color: 'white',
+                                            fontSize: matches2 ? 14 : 10, paddingX: 1
+                                        }}
+                                            onClick={() => addCartItem({ id: product.id, data: product.data, image: img.length > 0 && img[0].res, quantity: 1, category: 'watches' })}
+                                            variant="contained">
+                                            Add to cart
+                                        </Button>
                                     </div>
                                 </Card>
 
@@ -117,3 +130,4 @@ const Watches = () => {
 }
 
 export default Watches;
+

@@ -9,7 +9,7 @@ import Select from '@mui/material/Select';
 
 
 const Glasses = () => {
-    const { db, addCartItem } = useContext(MainContext)
+    const { db, addCartItem, matches2 } = useContext(MainContext)
     const [images, setImages] = useState([])
     const [products, setProducts] = useState([])
     const storage = getStorage();
@@ -59,12 +59,12 @@ const Glasses = () => {
     console.log(products)
 
     return (
-        <div className="m-auto container h-screen">
-            <p className="text-2xl mt-24 text-center">All watches:</p>
+        <div className="m-auto container min-h-screen">
+            <p className="text-lg sm:text-2xl mt-24 text-center">All watches:</p>
             {products &&
                 <div className="my-6">
-                    <div className="flex items-center">
-                        <p className="font-bold mr-1">SHORT BY(price):</p>
+                    <div className="flex flex-col sm:flex-row items-start">
+                        <p className="text-sm sm:text-base font-bold mr-1">SHORT BY(price):</p>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
@@ -88,10 +88,10 @@ const Glasses = () => {
                         return (
                             <div className="mx-4 my-6" key={product.id}>
 
-                                <Card sx={{ width: 250, height: 400, borderRadius: 3, position:'relative', dropShadow: '7px 7px 4px rgba(0, 0, 0, 0.18)' }}>
+                                <Card sx={{ width: matches2 ? 230 : 180, height: matches2 ? 400 : 300, position: 'relative', dropShadow: '5px 5px 3px rgba(0, 0, 0, 0.10)' }}>
                                 {stock < 1 && <div className="text-red-600 z-10 bg-white absolute top-2 left-2 px-4 text-lg">SOLD OUT</div>}
                                     <Link to='/productpage' state={{ data: product.data, id: product.id, category:'glasses' }}>
-                                        <CardMedia sx={{ height: 270, overflow: 'hidden' }} >
+                                        <CardMedia sx={{ height: matches2 ? 270 : 200, overflow: 'hidden'  }} >
                                             <img src={img.length > 0 && img[0].res}></img>
                                         </CardMedia>
                                     </Link>
@@ -101,7 +101,11 @@ const Glasses = () => {
                                             <p className="my-2">৳{price}</p>
                                            
                                         </Link>
-                                        <Button sx={{ backgroundColor: 'black', color: 'white' }} onClick={() => addCartItem({ id: product.id, data: product.data, image: img.length > 0 && img[0].res, quantity: 1, category:'glasses' })} variant="contained">Add to cart</Button>
+                                        <Button sx={{
+                                            backgroundColor: 'black',
+                                            color: 'white',
+                                            fontSize: matches2 ? 14 : 10, paddingX: 1
+                                        }} onClick={() => addCartItem({ id: product.id, data: product.data, image: img.length > 0 && img[0].res, quantity: 1, category:'glasses' })} variant="contained">Add to cart</Button>
                                     </div>
                                 </Card>
 

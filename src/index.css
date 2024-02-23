@@ -94,4 +94,17 @@ body{
         height: 235px;
         transform: rotate(-18deg);
     }
+
+    .watches{
+        height: 200px;
+        width: 180px;
+    }
+    .watches.three{
+        height: 215px;
+    }
+
+    .glasses{
+        width: 180px;
+        height: 210px;
+    }
 }

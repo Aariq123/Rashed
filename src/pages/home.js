@@ -3,17 +3,20 @@ import { Link } from 'react-router-dom';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import StyleIcon from '@mui/icons-material/Style';
+import { useContext } from "react";
+import { MainContext } from "../context";
 
 
 const Home = () => {
+    const { matches } = useContext(MainContext)
 
     return (
         <div>
             <div className="container m-auto">
-                <div className="h-screen flex justify-center items-center">
+                <div className="h-screen flex justify-center items-center overflow-x-hidden">
                     <div className="ml-2 sm:mr-6">
                         <h1 className="text-lg sm:text-2xl mb-4">Looking for unique watches?</h1>
-                        <Link to='/watches'><Button  variant="contained">See all watches</Button></Link>
+                        <Link to='/watches'><Button sx={{fontSize:matches?14:10,paddingX:1}} variant="contained">See all watches</Button></Link>
                     </div>
                     <div className="relative hero-container m-0 sm:ml-6">
                         <img className="hero-img watches one absolute" src={require('../resources/2.jpg')} alt="" />
@@ -29,7 +32,7 @@ const Home = () => {
                     </div>
                     <div className="mr-6 z-10">
                         <h1 className="text-lg sm:text-2xl mb-4">Looking for unique glasses?</h1>
-                        <Link to='/glasses'><Button  variant="contained">See all glasses</Button></Link>
+                        <Link to='/glasses'><Button sx={{fontSize:matches?14:10,paddingX:1}} variant="contained">See all glasses</Button></Link>
                     </div>
                 </div>
             </div>

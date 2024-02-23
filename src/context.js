@@ -3,9 +3,15 @@ import { useState } from "react";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getStorage, ref } from 'firebase/storage'
+import useMediaQuery from '@mui/material/useMediaQuery';
+
+
 export const MainContext = createContext()
 
+
 export const ContextProvider = ({ children }) => {
+  const matches = useMediaQuery('(min-width:460px)');
+  const matches2 = useMediaQuery('(min-width:900px)');
   const [ menuOpen, setMenuOpen ] = useState(false)
   const [ cartItem, setCartItem ] = useState([])
 
@@ -50,7 +56,7 @@ export const ContextProvider = ({ children }) => {
   }
  
     return (
-        <MainContext.Provider value={{menuOpen, cartItem,removeItem, setCartItem, addCartItem, closeMenu, openMenu, setMenuOpen, storageRef, db}}>
+        <MainContext.Provider value={{matches, matches2, menuOpen, cartItem,removeItem, setCartItem, addCartItem, closeMenu, openMenu, setMenuOpen, storageRef, db}}>
             {children}
         </MainContext.Provider>
     )

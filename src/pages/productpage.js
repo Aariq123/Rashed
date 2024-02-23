@@ -9,7 +9,7 @@ import TextField from "@mui/material/TextField";
 
 
 const Productpage = () => {
-  const { storageRef, addCartItem } = useContext(MainContext)
+  const { storageRef, addCartItem, matches } = useContext(MainContext)
   const location = useLocation()
   const storage = getStorage();
   const [imageList, setImageList] = useState([])
@@ -75,31 +75,31 @@ const Productpage = () => {
       <div className={`container m-auto ${fullscreen == '' ? '' : 'blur-md'}`}>
         {imageList &&
           <div>
-            <div className="flex justify-center mt-36">
-              <div>
-                <img src={displayImage ? displayImage : imageList[0]} onClick={(e) => fullscreenOn(e.target.src)} className="h-96 w-80 rounded-xl" alt="" />
+            <div className="flex flex-col sm:flex-row justify-center mt-36">
+              <div className="m-auto">
+                <img src={displayImage ? displayImage : imageList[0]} onClick={(e) => fullscreenOn(e.target.src)} className="w-2/4 m-auto sm:h-96 sm:w-80 rounded-xl" alt="" />
                 <div className="flex overflow-x-scroll m-6">
                   {imageList &&
                     imageList.map(image => {
                       return (
-                        <img onClick={() => setDisplayImage(image)} className="hover:cursor-pointer h-24 w-20 mx-2 rounded-md border-black border-2" src={image}></img>
+                        <img onClick={() => setDisplayImage(image)} className="hover:cursor-pointer h-18 w-14 sm:h-24 sm:w-20 mx-1 sm:mx-2 rounded-md border-black border-2" src={image}></img>
                       )
                     })
                   }
                 </div>
               </div>
               <div className="ml-6 mt-6">
-                <p className="text-2xl font-bold">{data.name}</p>
-                <p className="font-bold my-2">৳{data.price}</p>
-                <p className="my-2">{data.description}</p>
+                <p className="text-lg sm:text-2xl font-bold">{data.name}</p>
+                <p className="text-xs sm:text-base  font-bold my-2">৳{data.price}</p>
+                <p className="text-xs sm:text-base  my-2">{data.description}</p>
                 {data.stock > 0 ? <p className="text-green-600">In stock({data.stock})</p> : <p className="text-red-600">Stock out</p>}
                 <div className="flex mt-2">
                   <div className="flex items-center inline-block border-2 border-black mr-2">
-                    <IconButton onClick={() => toggleAmount('minus')} sx={{ borderRight: '1px solid black', borderRadius: 0 }}><RemoveIcon></RemoveIcon></IconButton>
+                    <IconButton sx={{fontSize:matches?14:10,paddingX:1}} onClick={() => toggleAmount('minus')} sx={{ borderRight: '1px solid black', borderRadius: 0 }}><RemoveIcon></RemoveIcon></IconButton>
                     <div className="text-xl px-2">{amount}</div>
-                    <IconButton onClick={() => toggleAmount('plus')} sx={{ borderLeft: '1px solid black', borderRadius: 0 }}><AddIcon></AddIcon></IconButton>
+                    <IconButton sx={{fontSize:matches?14:10,paddingX:1}} onClick={() => toggleAmount('plus')} sx={{ borderLeft: '1px solid black', borderRadius: 0 }}><AddIcon></AddIcon></IconButton>
                   </div>
-                  <Button onClick={() => addCartItem({ id: id, data: data, image: imageList[0], quantity: amount, leftEye, rightEye })} variant="contained">Add to cart</Button>
+                  <Button sx={{fontSize:matches?14:10,paddingX:1}} onClick={() => addCartItem({ id: id, data: data, image: imageList[0], quantity: amount, leftEye, rightEye })} variant="contained">Add to cart</Button>
                 </div>
               </div>
             </div>
@@ -109,7 +109,7 @@ const Productpage = () => {
                 {videoList &&
                   videoList.map(vid => {
                     return (
-                      <video className="h-72" controls>
+                      <video className="h-40 sm:h-72" controls>
                         <source src={vid}></source>
                       </video>
                     )

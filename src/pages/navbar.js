@@ -19,11 +19,11 @@ const Navbar = () => {
                         <img className='ligma' src={ligma} alt="" />
                     </Link>
                 </div>
-                <div onClick={openMenu} className={menuOpen ? 'hidden' : 'block md:hidden'}>
+                <div onClick={openMenu} className={menuOpen ? 'hidden' : 'block md:hidden mr-4'}>
                     <MenuIcon fontSize="large"></MenuIcon>
                 </div>
 
-                <div  className={menuOpen ? 'block md:hidden' : 'hidden'}>
+                <div  className={menuOpen ? 'block md:hidden mr-4' : 'hidden'}>
                     <IconButton onClick={()=>setMenuOpen(false)}><p className='font-bold text-2xl'>x</p></IconButton>
                 </div>
 
