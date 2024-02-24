@@ -13,7 +13,7 @@ const Home = () => {
     return (
         <div>
             <div className="container m-auto">
-                <div className="h-screen flex justify-center items-center overflow-x-hidden">
+                <div className="h-screen flex justify-start sm:justify-center items-center overflow-x-hidden">
                     <div className="ml-2 sm:mr-6">
                         <h1 className="text-lg sm:text-2xl mb-4">Looking for unique watches?</h1>
                         <Link to='/watches'><Button sx={{fontSize:matches?14:10,paddingX:1}} variant="contained">See all watches</Button></Link>

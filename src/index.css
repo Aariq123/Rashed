@@ -92,6 +92,7 @@ body{
 
     .watches.two{
         height: 235px;
+        left: 20%;
         transform: rotate(-18deg);
     }
 

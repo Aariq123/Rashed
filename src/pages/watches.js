@@ -92,9 +92,9 @@ const Watches = () => {
                         let img = images.filter(image => image.id == product.id)
 
                         return (
-                            <div className=" ml-2 sm:mx-4 my-8" key={product.id}>
+                            <div className=" ml-1 sm:mx-4 my-8" key={product.id}>
 
-                                <Card sx={{ width: matches2 ? 230 : 180, height: matches2 ? 400 : 300, position: 'relative', dropShadow: '5px 5px 3px rgba(0, 0, 0, 0.10)' }}>
+                                <Card sx={{ width: matches2 ? 230 : 170, height: matches2 ? 400 : 300, position: 'relative', dropShadow: '5px 5px 3px rgba(0, 0, 0, 0.10)' }}>
                                     {stock < 1 && <div className="text-red-600 z-10 bg-white absolute top-2 left-2 px-4 sm:text-lg">SOLD OUT</div>}
                                     <Link to='/productpage' state={{ data: product.data, id: product.id, category: 'watches' }}>
                                         <CardMedia sx={{ height: matches2 ? 270 : 200, overflow: 'hidden' }} >

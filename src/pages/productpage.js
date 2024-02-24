@@ -88,7 +88,7 @@ const Productpage = () => {
                   }
                 </div>
               </div>
-              <div className="ml-6 mt-6">
+              <div className="ml-6 my-12 sm:m-0 sm:mt-6">
                 <p className="text-lg sm:text-2xl font-bold">{data.name}</p>
                 <p className="text-xs sm:text-base  font-bold my-2">৳{data.price}</p>
                 <p className="text-xs sm:text-base  my-2">{data.description}</p>
