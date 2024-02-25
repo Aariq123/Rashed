@@ -8,33 +8,38 @@ import ligma from '../resources/ligma.jpg'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const Navbar = () => {
-    const { menuOpen, openMenu,  setMenuOpen, cartItem } = useContext(MainContext)
+    const { menuOpen, openMenu, setMenuOpen, cartItem, matches } = useContext(MainContext)
 
     return (
         <div className='bg-white absolute top-0 w-screen z-20 border-b-1 border-gray-200'>
-        <div className='nav container m-auto'>
-            <div className='w-full flex justify-between items-center'>
-                <div >
-                    <Link to='/'>
-                        <img className='ligma' src={ligma} alt="" />
-                    </Link>
-                </div>
-                <div onClick={openMenu} className={menuOpen ? 'hidden' : 'block md:hidden mr-4'}>
-                    <MenuIcon fontSize="large"></MenuIcon>
-                </div>
+            <div className='nav container m-auto'>
+                <div className='w-full flex justify-between items-center'>
+                    <div >
+                        <Link to='/'>
+                            <img className='ligma' src={ligma} alt="" />
+                        </Link>
+                    </div>
 
-                <div  className={menuOpen ? 'block md:hidden mr-4' : 'hidden'}>
-                    <IconButton onClick={()=>setMenuOpen(false)}><p className='font-bold text-2xl'>x</p></IconButton>
-                </div>
 
-                <div className={`gay absolute top-0 ${menuOpen ? 'right-2/4' : 'right-full'} border-2 border-black md:border-none md:static flex flex-col z-30 bg-white md:flex-row w-2/4 md:w-5/12 md:h-full justify-between`}>
-                    <NavLink className='gay py-6  pl-4 md:p-0' to='/'>Home</NavLink>
-                    <NavLink className='gay py-6 border-t-2 border-slate-200 md:border-none pl-4 md:p-0' to='/watches'>Watches</NavLink>
-                    <NavLink className='gay py-6 border-t-2 border-slate-200 md:border-none pl-4 md:p-0' to='/glasses'>Glasses</NavLink>
-                    <NavLink className='gay py-6 border-t-2 border-slate-200 md:border-none pl-4 md:p-0 relative' to='/cart'><ShoppingCartIcon></ShoppingCartIcon><p className='text-center absolute left-8 md:left-2/4 bottom-2/4 border-2 h-7 w-7 rounded-full'>{cartItem.length}</p></NavLink>
+                    <div className={`gay absolute top-0 ${menuOpen ? 'right-2/4' : 'right-full'} border-2 border-black md:border-none md:static flex flex-col z-30 bg-white md:flex-row w-2/4 md:w-5/12 md:h-full justify-between`}>
+                        <NavLink className='gay py-6  pl-4 md:p-0' to='/'>Home</NavLink>
+                        <NavLink className='gay py-6 border-t-2 border-slate-200 md:border-none pl-4 md:p-0' to='/watches'>Watches</NavLink>
+                        <NavLink className='gay py-6 border-t-2 border-slate-200 md:border-none pl-4 md:p-0' to='/glasses'>Glasses</NavLink>
+                    </div>
+
+                    <div className='flex items-center'>
+                        <div onClick={openMenu} className={menuOpen ? 'hidden' : 'block md:hidden ml-20'}>
+                            <MenuIcon fontSize={matches ? 'large' : 'medium'}></MenuIcon>
+                        </div>
+
+                        <div className={menuOpen ? 'block md:hidden mr-4' : 'hidden'}>
+                            <IconButton onClick={() => setMenuOpen(false)}><p className='font-bold text-2xl'>x</p></IconButton>
+                        </div>
+                        <NavLink className='mr-6 sm:m-0 gay py-6 pl-4 md:p-0 relative' to='/cart'><ShoppingCartIcon fontSize={matches ? 'large' : 'medium'}></ShoppingCartIcon><p className='text-center absolute left-8 md:left-2/4 bottom-2/4 border-2 h-7 w-7 rounded-full'>{cartItem.length}</p></NavLink>
+                    </div>
+
                 </div>
             </div>
-        </div>
         </div>
     );
 }

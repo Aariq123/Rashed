@@ -94,23 +94,24 @@ const Watches = () => {
                         return (
                             <div className=" ml-1 sm:mx-4 my-8" key={product.id}>
 
-                                <Card sx={{ width: matches2 ? 230 : 170, height: matches2 ? 400 : 300, position: 'relative', dropShadow: '5px 5px 3px rgba(0, 0, 0, 0.10)' }}>
+                                <Card sx={{ width: matches2 ? 220 : 160, minHeight: matches2 ? 400 : 300, position: 'relative' }}>
                                     {stock < 1 && <div className="text-red-600 z-10 bg-white absolute top-2 left-2 px-4 sm:text-lg">SOLD OUT</div>}
                                     <Link to='/productpage' state={{ data: product.data, id: product.id, category: 'watches' }}>
-                                        <CardMedia sx={{ height: matches2 ? 270 : 200, overflow: 'hidden' }} >
+                                        <CardMedia sx={{ height: matches2 ? 270 : 180, overflow: 'hidden' }} >
                                             <img src={img.length > 0 && img[0].res}></img>
                                         </CardMedia>
                                     </Link>
                                     <div className="p-2 pb-4 pt-0">
                                         <Link to='/productpage' state={{ data: product.data, id: product.id, category: 'watches' }}>
-                                            <p className="text-sm sm: text-base font-bold">{name}</p>
-                                            <p className="text-sm sm: text-base my-2">৳{price}</p>
+                                            <p className="text-xs sm:text-sm md:text-base font-bold">{name}</p>
+                                            <p className="text-xs sm:text-sm md:text-base my-2">৳{price}</p>
 
                                         </Link>
                                         <Button sx={{
                                             backgroundColor: 'black',
                                             color: 'white',
-                                            fontSize: matches2 ? 14 : 10, paddingX: 1
+                                            fontSize: matches2 ? 14 : 10, paddingX: 1,
+                                            height:matches ? 24 : 20
                                         }}
                                             onClick={() => addCartItem({ id: product.id, data: product.data, image: img.length > 0 && img[0].res, quantity: 1, category: 'watches' })}
                                             variant="contained">

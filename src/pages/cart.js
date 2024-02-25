@@ -5,7 +5,7 @@ import { Button, Card, CardMedia } from "@mui/material";
 import { doc, setDoc, updateDoc } from "firebase/firestore"; 
 
 const Cart = () => {
-    const { cartItem, removeItem, db, setCartItem } = useContext(MainContext)
+    const { cartItem, removeItem, db, setCartItem, matches } = useContext(MainContext)
     const [ total, setTotal ] = useState(0)
     const [ name, setName ] = useState('')
     const [ contact, setContact ] = useState('')
@@ -49,9 +49,9 @@ const Cart = () => {
         <div>
             <div className="container m-auto mt-20 text-center flex flex-col items-center">
                 <div className="w-full sm:w-2/4">
-                    <p className="text-2xl my-6">Your Cart:</p>
+                    <p className="text-lg sm:text-2xl my-6">Your Cart:</p>
                     <div className="px-6 sm:p-0">
-                        {cartItem.length == 0 && <p className="text-xl text-red-600 my-10">No items in your cart!</p>}
+                        {cartItem.length == 0 && <p className="text-base sm:text-xl text-red-600 my-10">No items in your cart!</p>}
                         {cartItem.length > 0 &&
                             <div>
                                 {cartItem.map((item, i) => {
@@ -83,26 +83,26 @@ const Cart = () => {
                     </div>
                 </div>
                 <div className="my-10 w-full md:w-2/4 px-2 md:px-0">
-                    <p className="text-2xl my-6">Additional info:</p>
-                    <form className="rounded-2xl py-10 px-1 mb-10 sm:px-6 shadow-2xl">
+                    <p className="text-base sm:text-2xl my-6">Additional info:</p>
+                    <form className="text-sm sm:text-base rounded-2xl py-10 px-1 mb-10 sm:px-6 shadow-2xl">
                         <div className="flex flex-col items-start">
                             <label>Name:</label>
-                            <TextField onChange={(e)=>setName(e.target.value)} value={name} fullWidth id="outlined-basic" label="your name" variant="outlined" />
+                            <TextField type="text" required size={matches ? 'normal' : 'small'} onChange={(e)=>setName(e.target.value)} value={name} fullWidth id="outlined-basic" label="your name" variant="outlined" />
                         </div>
                         <div className="flex flex-col my-6 items-start ">
                             <label>Phone number:</label>
-                            <TextField onChange={(e)=>setContact(e.target.value)} value={contact} fullWidth  id="outlined-basic" label="ex:015xxxxxxxx" variant="outlined" />
+                            <TextField type="number" required size={matches ? 'normal' : 'small'} onChange={(e)=>setContact(e.target.value)} value={contact} fullWidth  id="outlined-basic" label="ex:015xxxxxxxx" variant="outlined" />
                         </div> 
                         <div className="flex flex-col items-start ">
                             <label>Address:</label>
-                            <TextField onChange={(e)=>setAddress(e.target.value)} value={address} fullWidth id="outlined-basic" label="ex:525, Shahjahanpur, Dhaka" variant="outlined" />
+                            <TextField required size={matches ? 'normal' : 'small'} onChange={(e)=>setAddress(e.target.value)} value={address} fullWidth id="outlined-basic" label="ex:525, Shahjahanpur, Dhaka" variant="outlined" />
                         </div>
                     </form>
                     <Button onClick={send} variant="contained">Place order</Button>
                 </div>
                 <div className="my-6">
-                    <p className="text-lg">*Payment method:</p>
-                    <p className="text-red-600 mt-2">Cash on delivery</p>
+                    <p className="text-base sm:text-lg">*Payment method:</p>
+                    <p className="text-xs sm:text-base text-red-600 mt-2">Cash on delivery</p>
                 </div>
             </div>
         </div>

@@ -60,7 +60,7 @@ const Glasses = () => {
 
     return (
         <div className="m-auto container min-h-screen">
-            <p className="text-lg sm:text-2xl mt-24 text-center">All watches:</p>
+            <p className="text-lg sm:text-2xl mt-24 text-center">All glasses:</p>
             {products &&
                 <div className="my-6">
                     <div className="flex flex-col sm:flex-row items-start">

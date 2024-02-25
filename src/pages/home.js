@@ -24,7 +24,7 @@ const Home = () => {
                         <img className="hero-img watches three absolute" src={require('../resources/3.jpg')} alt="" />
                     </div>
                 </div>
-                <div className="h-screen flex justify-center items-center">
+                <div className="mb-24 sm:m-0 sm:h-screen flex justify-center items-center">
                     <div className="relative hero-container ml-6">
                         <img className="hero-img glasses one absolute" src={require('../resources/glass 1/1.jpg')} alt="" />
                         <img className="hero-img glasses two absolute" src={require('../resources/glass 1/2.jpg')} alt="" />
