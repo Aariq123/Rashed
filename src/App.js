@@ -10,6 +10,7 @@ import Footer from "./pages/footer";
 import Cart from "./pages/cart";
 import Watches from "./pages/watches";
 import Glasses from "./pages/glasses";
+import UserPage from "./pages/userpage";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/contact" element={<Contact></Contact>}></Route>
         <Route path="/productpage" element={<Productpage></Productpage>}></Route>
         <Route path="/cart" element={<Cart></Cart>}></Route>
+        <Route path="/userpage" element={<UserPage></UserPage>}></Route>
       </Routes>
       <Footer></Footer>
     </div>

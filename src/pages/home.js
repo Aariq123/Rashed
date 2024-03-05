@@ -19,9 +19,9 @@ const Home = () => {
                         <Link to='/watches'><Button sx={{fontSize:matches?14:10,paddingX:1}} variant="contained">See all watches</Button></Link>
                     </div>
                     <div className="relative hero-container m-0 sm:ml-6">
-                        <img className="hero-img watches one absolute" src={require('../resources/2.jpg')} alt="" />
-                        <img className="hero-img watches two absolute" src={require('../resources/New folder/home.jpg')} alt="" />
-                        <img className="hero-img watches three absolute" src={require('../resources/3.jpg')} alt="" />
+                        <img className="hero-img watches one absolute" src={require('../resources/sum watch/2.jpg')} alt="" />
+                        <img className="hero-img watches two absolute" src={require('../resources/sum watch/home.jpg')} alt="" />
+                        <img className="hero-img watches three absolute" src={require('../resources/sum watch/3.jpg')} alt="" />
                     </div>
                 </div>
                 <div className="mb-24 sm:m-0 sm:h-screen flex justify-center items-center">
@@ -39,19 +39,19 @@ const Home = () => {
 
             <div className="flex flex-col sm:flex-row justify-evenly text-center bg-gray-200 py-10 my-6">
                 <div>
-                    <LocalShippingIcon sx={{fontSize:60}}></LocalShippingIcon>
+                    <LocalShippingIcon fontSize={matches ? 'large' : 'small'}></LocalShippingIcon>
                     <p className="my-4 font-bold text-base sm:text-lg">Fast Delivery</p>
-                    <p className="text-sm sm:text-base">We deliver both inside and outside of Dhaka.</p>
+                    <p className="text-xs sm:text-sm md:text-base">We deliver both inside and outside of Dhaka.</p>
                 </div>
                 <div>
-                    <StyleIcon sx={{fontSize:60}}></StyleIcon>
+                    <StyleIcon fontSize={matches ? 'large' : 'small'}></StyleIcon>
                     <p className="my-4 font-bold text-base sm:text-lg">Lots Of Variety</p>
-                    <p className="text-sm sm:text-base">Rich collection of various brands.</p>
+                    <p className="text-xs sm:text-sm md:text-base">Rich collection of various brands.</p>
                 </div>
                 <div>
-                    <ThumbUpIcon sx={{fontSize:60}}></ThumbUpIcon>
+                    <ThumbUpIcon fontSize={matches ? 'large' : 'small'}></ThumbUpIcon>
                     <p className="my-4 font-bold text-base sm:text-lg">Affordable</p>
-                    <p className="text-sm sm:text-base">We offer a wide range of prices.</p>
+                    <p className="text-xs sm:text-sm md:text-base">We offer a wide range of prices.</p>
                 </div>
             </div>
         </div>

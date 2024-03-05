@@ -15,6 +15,7 @@ const Watches = () => {
     const storage = getStorage();
     const [loading, setLoading] = useState(false)
     const [priceShort, setPriceShort] = useState('Low to high')
+   
 
     useEffect(() => {
         if (products.length < 1) {
@@ -35,7 +36,7 @@ const Watches = () => {
         if (products.length > 0) {
             if (images.length < 1) {
                 products.forEach(item => {
-                    getDownloadURL(ref(storage, `watches/${parseInt(item.id)}/images/home.jpg`)).then(res => {
+                    getDownloadURL(ref(storage, `watches/${item.id}/images/home.jpg`)).then(res => {
                         setImages((prev) => [...prev, {
                             id: item.id,
                             res
@@ -57,9 +58,9 @@ const Watches = () => {
     }
 
 
-
     return (
         <div className="m-auto container min-h-screen">
+                           
             <p className="text-lg sm:text-2xl mt-24 text-center">All watches:</p>
             {products &&
                 <div className="my-6">
@@ -88,17 +89,16 @@ const Watches = () => {
                     products.map((product, i) => {
                         const { name, price, stock } = product.data
 
-                        console.log(stock)
                         let img = images.filter(image => image.id == product.id)
 
                         return (
-                            <div className=" ml-1 sm:mx-4 my-8" key={product.id}>
+                            <div className="sm:mx-4 my-8" key={product.id}>
 
                                 <Card sx={{ width: matches2 ? 220 : 160, minHeight: matches2 ? 400 : 300, position: 'relative' }}>
                                     {stock < 1 && <div className="text-red-600 z-10 bg-white absolute top-2 left-2 px-4 sm:text-lg">SOLD OUT</div>}
                                     <Link to='/productpage' state={{ data: product.data, id: product.id, category: 'watches' }}>
                                         <CardMedia sx={{ height: matches2 ? 270 : 180, overflow: 'hidden' }} >
-                                            <img src={img.length > 0 && img[0].res}></img>
+                                            <img src={img.length > 0 ? img[0].res : ''} alt="Couldn't fetch"></img>
                                         </CardMedia>
                                     </Link>
                                     <div className="p-2 pb-4 pt-0">
