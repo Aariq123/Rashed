@@ -14,16 +14,17 @@ export const ContextProvider = ({ children }) => {
   const matches2 = useMediaQuery('(min-width:900px)');
   const [menuOpen, setMenuOpen] = useState(false)
   const [cartItem, setCartItem] = useState([])
+  const [cartItemInitial, setCartItemInitial] = useState([])
   const [user, setUser] = useState(null)
   const [userDetails, setUserDetails] = useState(null)
 
   const firebaseConfig = {
-    apiKey: "AIzaSyA6OJkqXfQ8HGGUJqNxxbXBG1wJotmMCX8",
-    authDomain: "rashed-gayy.firebaseapp.com",
-    projectId: "rashed-gayy",
-    storageBucket: "rashed-gayy.appspot.com",
-    messagingSenderId: "618008330965",
-    appId: "1:618008330965:web:70e7cf2283b969fccad85c"
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID
   };
 
 
@@ -39,16 +40,12 @@ export const ContextProvider = ({ children }) => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user)
-        /*  getDoc(doc(db, 'signed users', user.uid))
-          .then((res)=>{
-            setUserDetails(res.data()) 
-          }) */
       } else {
         setUser(null)
-        //   setUserDetails(null)
       }
     });
   }, [])
+
 
 
   useEffect(() => {
@@ -59,7 +56,9 @@ export const ContextProvider = ({ children }) => {
     }
   }, [user])
 
+
   console.log(userDetails)
+
 
   const openMenu = () => {
     setMenuOpen(true)
@@ -77,17 +76,8 @@ export const ContextProvider = ({ children }) => {
 
 
   const addCartItem = (item) => {
-    console.log(item)
-    if (cartItem.length == 0) {
-      setCartItem([...cartItem, item])
-    }
-    cartItem.forEach(product => {
-      if (product.id == item.id && product.category == item.category) {
-        product.quantity++
-      } else if (product.id !== item.id) {
-        setCartItem([...cartItem, item])
-      }
-    })
+   setCartItemInitial([...cartItemInitial, item])
+   setCartItem(cartItemInitial)
   }
 
 
@@ -98,7 +88,7 @@ export const ContextProvider = ({ children }) => {
 
 
   return (
-    <MainContext.Provider value={{ user, setUser, setUserDetails, userDetails, app, matches, matches2, menuOpen, cartItem, removeItem, setCartItem, addCartItem, closeMenu, openMenu, setMenuOpen, storageRef, db }}>
+    <MainContext.Provider value={{ user, setCartItemInitial, setUser, setUserDetails, userDetails, app, matches, matches2, menuOpen, cartItem, removeItem, setCartItem, addCartItem, closeMenu, openMenu, setMenuOpen, storageRef, db }}>
       {children}
     </MainContext.Provider>
   )

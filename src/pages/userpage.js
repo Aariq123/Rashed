@@ -31,7 +31,7 @@ const UserPage = () => {
                     .then((res) => {
                         setUserDetails(res.data())
                     })
-            }).catch((err)=>{
+            }).catch((err) => {
                 console.log(err.code)
                 setErrorDiv(['red-600', 'Password or email may be wrong!'])
             })
@@ -42,28 +42,28 @@ const UserPage = () => {
 
     const signUp = () => {
         if (signUpEmail !== '' && signUpPassword !== '' && setSignUpName !== '') {
-            if(signUpPassword.length < 6){
+            if (signUpPassword.length < 6) {
                 setErrorDiv(['red-600', 'Password has to be at least 6 characters long!'])
-            }else{
+            } else {
                 createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
-                .then(res => {
-                    console.log(res)
-                    setUser(res.user)
-                    setDoc(doc(db, 'signed users', res.user.uid), {
-                        email: res.user.email,
-                        favourites: [],
-                        wishList: [],
-                        orderHistory: []
+                    .then(res => {
+                        console.log(res)
+                        setUser(res.user)
+                        setDoc(doc(db, 'signed users', res.user.uid), {
+                            email: res.user.email,
+                            favourites: [],
+                            wishList: [],
+                            orderHistory: []
+                        })
+                    }).catch((err) => {
+                        if (err.message == 'Firebase: Error (auth/email-already-in-use).') {
+                            setErrorDiv(['red-600', 'Email already in use!'])
+                        }
+                        console.log(err.message)
                     })
-                }).catch((err)=>{
-                    if(err.message == 'Firebase: Error (auth/email-already-in-use).'){
-                        setErrorDiv(['red-600', 'Email already in use!'])
-                    }
-                    console.log(err.message)
-                })
             }
-            
-        }else{
+
+        } else {
             setErrorDiv(['red-600', 'Fill Out All The Information!'])
         }
         setTimeout(() => setErrorDiv([]), 4000)
@@ -85,8 +85,8 @@ const UserPage = () => {
 
     const removeFromFavourites = (product) => {
         console.log(userDetails.favourites)
-        updateDoc(doc(db, 'signed users', user.uid),{
-           favourites:arrayRemove(product)
+        updateDoc(doc(db, 'signed users', user.uid), {
+            favourites: arrayRemove(product)
         })
     }
 
@@ -94,7 +94,7 @@ const UserPage = () => {
     return (
         <div className="container m-auto">
             <div className="flex min-h-screen text-center flex-col items-center justify-center">
-            <div className={errorDiv.length > 0 ? `z-20 font-bold text-${errorDiv[0]} text-lg p-8 transition-all duration-500 fixed top-1/3 right-0 bg-white rounded-md shadow-2xl` : 'text-white text-lg p-8 transition-all duration-500 fixed top-1/3 right-[-100%]'}>{errorDiv[1]}</div>
+                <div className={errorDiv.length > 0 ? `z-20 font-bold text-${errorDiv[0]} text-lg p-8 transition-all duration-500 fixed top-1/3 right-0 bg-white rounded-md shadow-2xl` : 'text-white text-lg p-8 transition-all duration-500 fixed top-1/3 right-[-100%]'}>{errorDiv[1]}</div>
                 {
                     user == null &&
                     <div className="w-full flex flex-col items-center justify-center">
@@ -131,45 +131,47 @@ const UserPage = () => {
                         <div className="w-full mb-6 mt-32 flex flex-col items-center">
                             <Avatar sx={{ bgcolor: deepOrange[500], height: 50, width: 50 }}></Avatar>
                             <p className="text-sm sm:text-base font-bold my-6">{user && user.email}</p>
-                            <Button sx={{height:matches ? 26 : 21, fontSize:matches? 13 :10}} onClick={signout} variant="contained" >Sign out</Button>
+                            <Button sx={{ height: matches ? 26 : 21, fontSize: matches ? 13 : 10 }} onClick={signout} variant="contained" >Sign out</Button>
                         </div>
-                        <div className="w-full flex flex-col items-center px-3 sm:p-0">
-                            <p className="text-md sm:text-lg my-10 font-bold">Favourites:</p>
-                            {userDetails.favourites.length > 0 &&
-                                userDetails.favourites.map(product => {
-                                    const { name, price } = product.data  
-                                    return (
-                                        <div key={product.id} className="flex w-full mb-6 sm:w-96 rounded-lg p-2 shadow-lg border-1 border-slate-300 items-center justify-between">
-                                            <Link to='/productpage' state={{ data: product.data, id: product.id, category: 'watches' }}>
-                                            <div className="text-left">
-                                                <p className="text-xs sm:text-sm md:text-base font-bold">{name}</p>
-                                                <p className="text-xs sm:text-sm md:text-base mt-2">৳{price}</p>
+                        <div className="flex flex-col md:flex-row justify-between w-full mt-10">
+                            <div className="w-full flex flex-col items-center px-3 sm:p-0">
+                                <p className="text-md sm:text-lg my-10 font-bold">Favourites:</p>
+                                {userDetails.favourites.length > 0 &&
+                                    userDetails.favourites.map(product => {
+                                        const { name, price } = product.data
+                                        return (
+                                            <div key={product.id} className="flex w-full mb-6 sm:w-96 rounded-lg p-2 shadow-lg border-1 border-slate-300 items-center justify-between">
+                                                <Link to='/productpage' state={{ data: product.data, id: product.id, category: 'watches' }}>
+                                                    <div className="text-left">
+                                                        <p className="text-xs sm:text-sm md:text-base font-bold">{name}</p>
+                                                        <p className="text-xs sm:text-sm md:text-base mt-2">৳{price}</p>
+                                                    </div>
+                                                </Link>
+                                                <Button onClick={() => removeFromFavourites(product)} sx={{ height: matches ? 26 : 20, fontSize: matches ? 13 : 10 }} variant="outlined" color="error">Remove</Button>
                                             </div>
-                                            </Link>
-                                            <Button onClick={() => removeFromFavourites(product)} sx={{height:matches ? 26 : 20, fontSize:matches? 13 :10}} variant="outlined" color="error">Remove</Button>
-                                        </div>
-                                    )  
-                                })
-                            }
-                            {userDetails.favourites.length == 0 && <div className="text-red-600">No favourites!</div>}
-                        </div>
-                        <div className="w-full flex flex-col items-center px-3 sm:p-0">
-                            <p className="text-md sm:text-lg my-10 font-bold">Wishlist:</p>
-                            {userDetails.wishList.length > 0 &&
-                                userDetails.wishList.map(product => {
-                                    const { name, price } = product.data  
-                                    return (
-                                        <div key={product.key} className="flex w-full mb-6 sm:w-96 rounded-lg p-2 shadow-lg border-1 border-slate-300 items-center justify-between">
-                                            <div className="text-left">
-                                            <p className="text-xs sm:text-sm md:text-base font-bold">{name}</p>
-                                                <p className="text-xs sm:text-sm md:text-base mt-2">৳{price}</p>
+                                        )
+                                    })
+                                }
+                                {userDetails.favourites.length == 0 && <div className="text-red-600">No favourites!</div>}
+                            </div>
+                            <div className="w-full flex flex-col items-center px-3 sm:p-0">
+                                <p className="text-md sm:text-lg my-10 font-bold">Wishlist:</p>
+                                {userDetails.wishList.length > 0 &&
+                                    userDetails.wishList.map(product => {
+                                        const { name, price } = product.data
+                                        return (
+                                            <div key={product.key} className="flex w-full mb-6 sm:w-96 rounded-lg p-2 shadow-lg border-1 border-slate-300 items-center justify-between">
+                                                <div className="text-left">
+                                                    <p className="text-xs sm:text-sm md:text-base font-bold">{name}</p>
+                                                    <p className="text-xs sm:text-sm md:text-base mt-2">৳{price}</p>
+                                                </div>
+                                                <Button sx={{ height: 26 }} variant="outlined" color="error">Remove</Button>
                                             </div>
-                                            <Button sx={{height:26}} variant="outlined" color="error">Remove</Button>
-                                        </div>
-                                    )  
-                                })
-                            }
-                            {userDetails.wishList.length == 0 && <div className="text-red-600">No items!</div>}
+                                        )
+                                    })
+                                }
+                                {userDetails.wishList.length == 0 && <div className="text-red-600">No items!</div>}
+                            </div>
                         </div>
                     </div>
                 }

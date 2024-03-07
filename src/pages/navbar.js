@@ -30,14 +30,14 @@ const Navbar = () => {
                     </div>
 
                     <div className='flex items-center'>
-                        <div onClick={openMenu} className={menuOpen ? 'hidden' : 'block md:hidden ml-20'}>
+                    <NavLink className='mr-8 gay py-6 pl-4 md:p-0 relative' to='/cart'><ShoppingCartIcon fontSize={matches ? 'medium' : 'small'}></ShoppingCartIcon><p className='text-center absolute left-6 md:left-2/4 bottom-2/4 border-2 h-7 w-7 rounded-full'>{cartItem.length}</p></NavLink>
+                        <div onClick={openMenu} className={menuOpen ? 'hidden' : 'block md:hidden ml-6 mr-4'}>
                             <MenuIcon fontSize={matches ? 'large' : 'medium'}></MenuIcon>
                         </div>
 
                         <div className={menuOpen ? 'block md:hidden mr-4' : 'hidden'}>
                             <IconButton onClick={() => setMenuOpen(false)}><p className='font-bold text-2xl'>x</p></IconButton>
                         </div>
-                        <NavLink className='mr-6 sm:m-0 gay py-6 pl-4 md:p-0 relative' to='/cart'><ShoppingCartIcon fontSize={matches ? 'medium' : 'small'}></ShoppingCartIcon><p className='text-center absolute left-8 md:left-2/4 bottom-2/4 border-2 h-7 w-7 rounded-full'>{cartItem.length}</p></NavLink>
                     </div>
 
                 </div>

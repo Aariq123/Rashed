@@ -127,8 +127,8 @@ const Productpage = () => {
         {imageList &&
           <div>
             <div className="flex flex-col sm:flex-row justify-center mt-36">
-              <div className="sm:mr-8">
-                <img src={displayImage ? displayImage : imageList[0]} onClick={(e) => fullscreenOn(e.target.src)} className="w-2/4 m-auto sm:h-96 sm:w-80 rounded-xl" alt="" />
+              <div className="sm:mr-8 w-full sm:w-2/4">
+                <img src={displayImage ? displayImage : imageList[0]} onClick={(e) => fullscreenOn(e.target.src)} className="h-72 sm:h-80 md:h-96 m-auto rounded-xl" alt="" />
                 <div className="flex justify-center overflow-x-scroll m-6">
                   {imageList &&
                     imageList.map(image => {
@@ -139,17 +139,17 @@ const Productpage = () => {
                   }
                 </div>
               </div>
-              <div className="mx-3 my-12 sm:m-0 sm:mt-6">
-                <p className="text-base sm:text-xl font-bold">{data.name}</p>
-                <p className="text-xs sm:text-base  font-bold my-2">৳{data.price}</p>
-                <p className="text-xs sm:text-base text-wrap my-2">{data.description}</p>
+              <div className="mx-3 my-12 sm:m-0 sm:mt-6 w-full sm:w-2/4">
+                <p className="text-base sm:text-lg md:text-xl font-bold">{data.name}</p>
+                <p className="text-xs sm:text-sm md:text-basefont-bold my-2">৳{data.price}</p>
+                <p className="text-xs sm:text-sm md:text-base text-wrap my-2">{data.description}</p>
                 {data.stock > 0 ? <p className="text-green-600">In stock({data.stock})</p> : <p className="text-red-600">Stock out</p>}
                 <div className="flex flex-col">
                   <div className="flex mt-2 items-center">
                     <div className="flex items-center inline-block border-2 border-black mr-2">
-                      <IconButton sx={{ fontSize: matches ? 14 : 10, paddingX: 1 }} onClick={() => toggleAmount('minus')}><RemoveIcon></RemoveIcon></IconButton>
+                      <IconButton sx={{ height: matches ? 14 : 5, paddingX: 1, paddingY: matches? 1: 0}} onClick={() => toggleAmount('minus')}><RemoveIcon></RemoveIcon></IconButton>
                       <div className="text-xl px-2">{amount}</div>
-                      <IconButton sx={{ fontSize: matches ? 14 : 10, paddingX: 1 }} onClick={() => toggleAmount('plus')}><AddIcon></AddIcon></IconButton>
+                      <IconButton sx={{ fontSize: matches ? 14 : 10, paddingX: 1, paddingY:matches ? 1 : 0 }} onClick={() => toggleAmount('plus')}><AddIcon></AddIcon></IconButton>
                     </div>
                     <Button sx={{ fontSize: matches ? 14 : 10, height: matches ? 25 : 30, paddingX: 1 }} onClick={stockOrNot} variant="contained">Add to cart</Button>
                   </div>
