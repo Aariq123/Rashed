@@ -76,8 +76,17 @@ export const ContextProvider = ({ children }) => {
 
 
   const addCartItem = (item) => {
-   setCartItemInitial([...cartItemInitial, item])
-   setCartItem(cartItemInitial)
+    if(cartItem.length > 0){
+      cartItem.forEach(product=>{
+        if(product.id == item.id && product.category == item.category){
+          product.quantity += item.quantity
+        }else{
+          setCartItem([...cartItem, item])
+        }
+      })
+    }else{
+      setCartItem([...cartItem, item])
+    }
   }
 
 

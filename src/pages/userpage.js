@@ -40,20 +40,26 @@ const UserPage = () => {
     }
 
 
+    const date = new Date()
+
+    console.log(date.getDate(), date.getMonth(), date.getFullYear())
+
     const signUp = () => {
         if (signUpEmail !== '' && signUpPassword !== '' && setSignUpName !== '') {
             if (signUpPassword.length < 6) {
                 setErrorDiv(['red-600', 'Password has to be at least 6 characters long!'])
             } else {
+                const date = new Date()
                 createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
                     .then(res => {
                         console.log(res)
                         setUser(res.user)
                         setDoc(doc(db, 'signed users', res.user.uid), {
+                            dateCreated:`${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}}`,
                             email: res.user.email,
                             favourites: [],
                             wishList: [],
-                            orderHistory: []
+                            orderHistory: [],
                         })
                     }).catch((err) => {
                         if (err.message == 'Firebase: Error (auth/email-already-in-use).') {
