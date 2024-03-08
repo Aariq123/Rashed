@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/rashed/static/css/main.4a52ddb9.css",
-    "main.js": "/rashed/static/js/main.17133eb6.js",
+    "main.js": "/rashed/static/js/main.63db1f60.js",
     "static/media/home.jpg": "/rashed/static/media/home.8af18f9ea9b408b2e1d5.jpg",
     "static/media/3.jpg": "/rashed/static/media/3.9514eaf405fb5ce08200.jpg",
     "static/media/1.jpg": "/rashed/static/media/1.5a2d76fdd69b65141b39.jpg",
@@ -9,10 +9,10 @@
     "static/media/ligma.jpg": "/rashed/static/media/ligma.7e2d304e7f25746e3e4e.jpg",
     "index.html": "/rashed/index.html",
     "main.4a52ddb9.css.map": "/rashed/static/css/main.4a52ddb9.css.map",
-    "main.17133eb6.js.map": "/rashed/static/js/main.17133eb6.js.map"
+    "main.63db1f60.js.map": "/rashed/static/js/main.63db1f60.js.map"
   },
   "entrypoints": [
     "static/css/main.4a52ddb9.css",
-    "static/js/main.17133eb6.js"
+    "static/js/main.63db1f60.js"
   ]
 }
