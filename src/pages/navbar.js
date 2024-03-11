@@ -22,20 +22,21 @@ const Navbar = () => {
                     </div>
 
 
-                    <div className={`gay absolute top-0 ${menuOpen ? 'right-2/4' : 'right-full'} border-2 border-black md:border-none md:static flex flex-col z-30 bg-white md:flex-row w-2/4 md:w-5/12 md:h-full justify-between`}>
-                        <NavLink className='gay py-6  pl-4 md:p-0' to='/'>Home</NavLink>
-                        <NavLink className='gay py-6 border-t-2 border-slate-200 md:border-none pl-4 md:p-0' to='/watches'>Watches</NavLink>
-                        <NavLink className='gay py-6 border-t-2 border-slate-200 md:border-none pl-4 md:p-0' to='/glasses'>Glasses</NavLink>
-                        <NavLink className='gay py-6 border-t-2 border-slate-200 md:border-none pl-4 md:p-0' to='/userpage'><Avatar sx={{height:25, width:25, bgcolor: user!== null && deepOrange[500], fontSize:16}}></Avatar></NavLink>
+                    <div className={`gay absolute top-0 ${menuOpen ? 'right-2/4' : 'right-full'} shadow-lg sm:shadow-none md:border-none md:static flex flex-col z-30 bg-white md:flex-row w-2/4 md:w-5/12 md:h-full justify-between`}>
+                        <NavLink className='gay py-6 text-sm sm:text-base pl-4 md:p-0' to='/'>Home</NavLink>
+                        <NavLink className='gay py-6 text-sm sm:text-base border-t-2 border-slate-200 md:border-none pl-4 md:p-0' to='/watches'>Watches</NavLink>
+                        <NavLink className='gay py-6 text-sm sm:text-base border-t-2 border-slate-200 md:border-none pl-4 md:p-0' to='/glasses'>Glasses</NavLink>
+
                     </div>
 
                     <div className='flex items-center'>
-                    <NavLink className='mr-8 gay py-6 pl-4 md:p-0 relative' to='/cart'><ShoppingCartIcon fontSize={matches ? 'medium' : 'small'}></ShoppingCartIcon><p className='text-center absolute left-6 md:left-2/4 bottom-2/4 border-2 h-7 w-7 rounded-full'>{cartItem.length}</p></NavLink>
+                        <NavLink className='mr-4 gay py-6 pl-4 md:p-0 relative' to='/cart'><ShoppingCartIcon fontSize={matches ? 'medium' : 'small'}></ShoppingCartIcon><p className='text-center absolute left-6 md:left-2/4 bottom-2/4 border-2 h-6 w-6  rounded-full'>{cartItem.length}</p></NavLink>
+                        <NavLink className='m-0 sm:ml-6 py-6 border-t-2 border-slate-200 md:border-none pl-4 md:p-0' to='/userpage'><Avatar sx={{ height: 25, width: 25, bgcolor: user !== null && deepOrange[500], fontSize: 16 }}></Avatar></NavLink>
                         <div onClick={openMenu} className={menuOpen ? 'hidden' : 'block md:hidden ml-6 mr-4'}>
                             <MenuIcon fontSize={matches ? 'large' : 'medium'}></MenuIcon>
                         </div>
 
-                        <div className={menuOpen ? 'block md:hidden mr-4' : 'hidden'}>
+                        <div className={menuOpen ? 'block md:hidden mr-4 ml-6' : 'hidden'}>
                             <IconButton onClick={() => setMenuOpen(false)}><p className='font-bold text-2xl'>x</p></IconButton>
                         </div>
                     </div>

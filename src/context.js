@@ -19,12 +19,23 @@ export const ContextProvider = ({ children }) => {
   const [userDetails, setUserDetails] = useState(null)
 
   const firebaseConfig = {
+    /*
     apiKey: process.env.REACT_APP_API_KEY,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,
     projectId: process.env.REACT_APP_PROJECT_ID,
     storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
     messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
     appId: process.env.REACT_APP_APP_ID
+*/
+   
+
+  apiKey: "AIzaSyA6OJkqXfQ8HGGUJqNxxbXBG1wJotmMCX8",
+  authDomain: "rashed-gayy.firebaseapp.com",
+  databaseURL: "https://rashed-gayy-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "rashed-gayy",
+  storageBucket: "rashed-gayy.appspot.com",
+  messagingSenderId: "618008330965",
+  appId: "1:618008330965:web:70e7cf2283b969fccad85c"
   };
 
 
@@ -57,7 +68,7 @@ export const ContextProvider = ({ children }) => {
   }, [user])
 
 
-  console.log(userDetails)
+  console.log(cartItem)
 
 
   const openMenu = () => {
@@ -76,17 +87,7 @@ export const ContextProvider = ({ children }) => {
 
 
   const addCartItem = (item) => {
-    if(cartItem.length > 0){
-      cartItem.forEach(product=>{
-        if(product.id == item.id && product.category == item.category){
-          product.quantity += item.quantity
-        }else{
-          setCartItem([...cartItem, item])
-        }
-      })
-    }else{
-      setCartItem([...cartItem, item])
-    }
+    
   }
 
 

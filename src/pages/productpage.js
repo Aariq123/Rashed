@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { MainContext } from "../context";
 import { useLocation } from "react-router-dom";
-import { Button, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { getDownloadURL, listAll, getStorage, ref } from "firebase/storage";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -11,9 +11,10 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import DefaultButton from "./button";
 
 const Productpage = () => {
-  const { storageRef, addCartItem, matches, userDetails, user, db } = useContext(MainContext)
+  const { addCartItem, matches, userDetails, user, db } = useContext(MainContext)
   const location = useLocation()
   const { data, id, category } = location.state
   const storage = getStorage();
@@ -116,7 +117,7 @@ const Productpage = () => {
     }
   }, [userDetails, userDetails])
 
-  console.log(data)
+  
   return (
     <div onClick={(e) => fullscreenOff(e.target)}>
       {<div className={`absolute top-0 flex flex-col justify-center items-center left-0 overflow-hidden z-40 w-screen h-screen ${fullscreen == '' ? 'hidden' : ''}`}>
@@ -126,24 +127,24 @@ const Productpage = () => {
       <div className={`container m-auto ${fullscreen == '' ? '' : 'z-40 blur-md'}`}>
         {imageList &&
           <div>
-            <div className="flex flex-col sm:flex-row justify-center mt-36">
+            <div className="flex flex-col sm:flex-row justify-center mt-24">
               <div className="sm:mr-8 w-full sm:w-2/4">
                 <img src={displayImage ? displayImage : imageList[0]} onClick={(e) => fullscreenOn(e.target.src)} className="h-72 sm:h-80 md:h-96 m-auto rounded-xl" alt="" />
-                <div className="flex justify-center overflow-x-scroll m-6">
+                <div className="flex justify-center mt-4 m-auto max-w-44 sm:max-w-80 overflow-x-scroll ">
                   {imageList &&
                     imageList.map(image => {
                       return (
-                        <img onClick={() => setDisplayImage(image)} className="hover:cursor-pointer h-18 w-14 sm:h-24 sm:w-20 mx-1 sm:mx-2 rounded-md border-black border-2" src={image}></img>
+                        <img onClick={() => setDisplayImage(image)} className="hover:cursor-pointer h-12 w-10 sm:h-24 sm:w-20 mx-1 sm:mx-2 rounded-md border-black border-2" src={image}></img>
                       )
                     })
                   }
                 </div>
               </div>
-              <div className="mx-3 my-12 sm:m-0 sm:mt-6 w-full sm:w-2/4">
+              <div className="mx-3 my-8 sm:m-0 sm:mt-6 w-full sm:w-2/4">
                 <p className="text-base sm:text-lg md:text-xl font-bold">{data.name}</p>
                 <p className="text-xs sm:text-sm md:text-basefont-bold my-2">৳{data.price}</p>
                 <p className="text-xs sm:text-sm md:text-base text-wrap my-2">{data.description}</p>
-                {data.stock > 0 ? <p className="text-green-600">In stock({data.stock})</p> : <p className="text-red-600">Stock out</p>}
+                {data.stock > 0 ? <p className="text-sm sm:text-base text-green-600">In stock({data.stock})</p> : <p className="text-sm sm:text-base text-red-600">Stock out</p>}
                 <div className="flex flex-col">
                   <div className="flex mt-2 items-center">
                     <div className="flex items-center inline-block border-2 border-black mr-2">
@@ -151,7 +152,7 @@ const Productpage = () => {
                       <div className="text-xl px-2">{amount}</div>
                       <IconButton sx={{ fontSize: matches ? 14 : 10, paddingX: 1, paddingY:matches ? 1 : 0 }} onClick={() => toggleAmount('plus')}><AddIcon></AddIcon></IconButton>
                     </div>
-                    <Button sx={{ fontSize: matches ? 14 : 10, height: matches ? 25 : 30, paddingX: 1 }} onClick={stockOrNot} variant="contained">Add to cart</Button>
+                    <DefaultButton onClick={stockOrNot} text='Add to cart'></DefaultButton>
                   </div>
                   {userDetails &&
                     <div className="mt-4 flex">

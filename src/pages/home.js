@@ -5,7 +5,7 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import StyleIcon from '@mui/icons-material/Style';
 import { useContext } from "react";
 import { MainContext } from "../context";
-
+import DefaultButton from "./button";
 
 const Home = () => {
     const { matches } = useContext(MainContext)
@@ -16,7 +16,7 @@ const Home = () => {
                 <div className="h-screen flex justify-start sm:justify-center items-center overflow-x-hidden">
                     <div className="ml-2 sm:mr-6">
                         <h1 className="text-lg sm:text-2xl mb-4">Looking for unique watches?</h1>
-                        <Link to='/watches'><Button sx={{fontSize:matches?14:10,paddingX:1}} variant="contained">See all watches</Button></Link>
+                        <Link to='/watches'><DefaultButton text='See all watches'></DefaultButton></Link>
                     </div>
                     <div className="relative hero-container m-0 sm:ml-6">
                         <img className="hero-img watches one absolute" src={require('../resources/sum watch/2.jpg')} alt="" />
@@ -32,7 +32,7 @@ const Home = () => {
                     </div>
                     <div className="mr-6 z-10">
                         <h1 className="text-lg sm:text-2xl mb-4">Looking for unique glasses?</h1>
-                        <Link to='/glasses'><Button sx={{fontSize:matches?14:10,paddingX:1}} variant="contained">See all glasses</Button></Link>
+                        <Link to='/glasses'><DefaultButton text='See all glasses'></DefaultButton></Link>
                     </div>
                 </div>
             </div>

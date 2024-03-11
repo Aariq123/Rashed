@@ -3,6 +3,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { MainContext } from "../context";
 import { Button, Card, CardMedia } from "@mui/material";
 import { doc, setDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import DefaultButton from "./button";
 
 const Cart = () => {
     const { cartItem, removeItem, db, setCartItem, matches, user } = useContext(MainContext)
@@ -122,7 +123,7 @@ const Cart = () => {
                             <TextField required size={matches ? 'normal' : 'small'} onChange={(e) => setAddress(e.target.value)} value={address} fullWidth id="outlined-basic" label="ex:525, Shahjahanpur, Dhaka" variant="outlined" />
                         </div>
                     </form>
-                    <Button onClick={send} variant="contained">Place order</Button>
+                    <DefaultButton text='place order' onClick={send}></DefaultButton>
                 </div>
                 <div className="my-6">
                     <p className="text-base sm:text-lg">*Payment method:</p>
