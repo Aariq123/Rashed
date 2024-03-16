@@ -27,7 +27,7 @@ const UserPage = () => {
         if (logInEmail !== '' && logInPassword !== '') {
             signInWithEmailAndPassword(auth, logInEmail, logInPassword).then(res => {
                 setUser(res.user)
-                getDoc(doc(db, 'signed users', res.user.uid))
+                getDoc(doc(db, 'signedUsers', res.user.uid))
                     .then((res) => {
                         setUserDetails(res.data())
                     })
@@ -38,7 +38,6 @@ const UserPage = () => {
             setTimeout(() => setErrorDiv([]), 4000)
         }
     }
-
 
     const date = new Date()
 
@@ -54,8 +53,9 @@ const UserPage = () => {
                     .then(res => {
                         console.log(res)
                         setUser(res.user)
-                        setDoc(doc(db, 'signed users', res.user.uid), {
-                            dateCreated:`${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}}`,
+                        setDoc(doc(db, 'signedUsers', res.user.uid), {
+                            userId:res.user.uid,
+                            dateCreated:`${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`,
                             email: res.user.email,
                             favourites: [],
                             wishList: [],
@@ -91,7 +91,7 @@ const UserPage = () => {
 
     const removeFromFavourites = (product) => {
         console.log(userDetails.favourites)
-        updateDoc(doc(db, 'signed users', user.uid), {
+        updateDoc(doc(db, 'signedUsers', user.uid), {
             favourites: arrayRemove(product)
         })
     }

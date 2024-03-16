@@ -30,8 +30,8 @@ const Navbar = () => {
                     </div>
 
                     <div className='flex items-center'>
-                        <NavLink className='mr-4 gay py-6 pl-4 md:p-0 relative' to='/cart'><ShoppingCartIcon fontSize={matches ? 'medium' : 'small'}></ShoppingCartIcon><p className='text-center absolute left-6 md:left-2/4 bottom-2/4 border-2 h-6 w-6  rounded-full'>{cartItem.length}</p></NavLink>
-                        <NavLink className='m-0 sm:ml-6 py-6 border-t-2 border-slate-200 md:border-none pl-4 md:p-0' to='/userpage'><Avatar sx={{ height: 25, width: 25, bgcolor: user !== null && deepOrange[500], fontSize: 16 }}></Avatar></NavLink>
+                        <NavLink className='mr-4 gay py-6 pl-4 md:p-0 relative' to='/cart'><ShoppingCartIcon fontSize={matches ? 'medium' : 'small'}></ShoppingCartIcon><p className='text-center absolute left-7 md:left-2/4 bottom-10 md:bottom-4 border-2 h-6 w-6  rounded-full'>{cartItem.length}</p></NavLink>
+                        <NavLink className='m-0 sm:mx-6 py-6 border-t-2 border-slate-200 md:border-none pl-4 md:p-0' to='/userpage'><Avatar sx={{ height: 25, width: 25, bgcolor: user !== null && deepOrange[500], fontSize: 16 }}></Avatar></NavLink>
                         <div onClick={openMenu} className={menuOpen ? 'hidden' : 'block md:hidden ml-6 mr-4'}>
                             <MenuIcon fontSize={matches ? 'large' : 'medium'}></MenuIcon>
                         </div>
