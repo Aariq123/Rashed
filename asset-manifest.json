@@ -1,18 +1,17 @@
 {
   "files": {
-    "main.css": "/rashed/static/css/main.fff009b9.css",
-    "main.js": "/rashed/static/js/main.4a063a46.js",
-    "static/media/home.jpg": "/rashed/static/media/home.8af18f9ea9b408b2e1d5.jpg",
-    "static/media/3.jpg": "/rashed/static/media/3.9514eaf405fb5ce08200.jpg",
-    "static/media/1.jpg": "/rashed/static/media/1.5a2d76fdd69b65141b39.jpg",
-    "static/media/2.jpg": "/rashed/static/media/2.93fdd0d21729ca49820e.jpg",
+    "main.css": "/rashed/static/css/main.41594771.css",
+    "main.js": "/rashed/static/js/main.9eae53b6.js",
     "static/media/ligma.jpg": "/rashed/static/media/ligma.7e2d304e7f25746e3e4e.jpg",
+    "static/media/menswatch.jpg": "/rashed/static/media/menswatch.7da1bc4f1ddcc0d0d514.jpg",
+    "static/media/womenswatch.jpg": "/rashed/static/media/womenswatch.7d5cca0e79b7f40abc14.jpg",
+    "static/media/glass.jpg": "/rashed/static/media/glass.3e1c30c6e40479c3a163.jpg",
     "index.html": "/rashed/index.html",
-    "main.fff009b9.css.map": "/rashed/static/css/main.fff009b9.css.map",
-    "main.4a063a46.js.map": "/rashed/static/js/main.4a063a46.js.map"
+    "main.41594771.css.map": "/rashed/static/css/main.41594771.css.map",
+    "main.9eae53b6.js.map": "/rashed/static/js/main.9eae53b6.js.map"
   },
   "entrypoints": [
-    "static/css/main.fff009b9.css",
-    "static/js/main.4a063a46.js"
+    "static/css/main.41594771.css",
+    "static/js/main.9eae53b6.js"
   ]
 }
