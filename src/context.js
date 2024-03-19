@@ -17,7 +17,7 @@ export const ContextProvider = ({ children }) => {
   const [cartItemInitial, setCartItemInitial] = useState([])
   const [user, setUser] = useState(null)
   const [userDetails, setUserDetails] = useState(null)
-  const [ count, setCount ] = useState(0) 
+  const [count, setCount] = useState(0)
 
   const firebaseConfig = {
     /*
@@ -47,7 +47,7 @@ export const ContextProvider = ({ children }) => {
   const auth = getAuth();
 
 
-
+  console.log(userDetails)
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -62,15 +62,20 @@ export const ContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      onSnapshot(doc(db, 'signed users', user.uid), (doc) => {
-        setUserDetails(doc.data())
-      })
+      onSnapshot(doc(db, 'signedUsers', user.uid),
+        (doc) => {
+          setUserDetails(doc.data())
+        },
+        (err) => { console.log(err) }
+      )
     }
   }, [user])
 
 
-  console.log(cartItem)
 
+  useEffect(() => {
+    console.log(userDetails)
+  }, [userDetails])
 
   const openMenu = () => {
     setMenuOpen(true)
@@ -88,7 +93,7 @@ export const ContextProvider = ({ children }) => {
 
 
   const addCartItem = (item) => {
-   
+
 
     if (cartItem.length < 1) {
       setCartItem([...cartItem, item])
@@ -104,12 +109,12 @@ export const ContextProvider = ({ children }) => {
           }
         } else {
           setCartItem([...cartItem, item])
-          setCount(count+1)
+          setCount(count + 1)
         }
       })
     }
   }
-console.log(count)
+  console.log(count)
   const removeItem = (index) => {
     setCartItem(cartItem.filter((item, i) => i !== index))
   }

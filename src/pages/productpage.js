@@ -18,8 +18,9 @@ const Productpage = () => {
   const location = useLocation()
   const { data, id, category } = location.state
   const storage = getStorage();
-  const [imageList, setImageList] = useState([])
   const [videoList, setVideoList] = useState([])
+  const [imageList, setImageList] = useState([])
+  const [image, setImage] = useState('')
   const [amount, setAmount] = useState(1)
   const [displayImage, setDisplayImage] = useState('')
   const [fullscreen, setFullscreen] = useState('')
@@ -29,14 +30,16 @@ const Productpage = () => {
   const [favourite, setFavourite] = useState(false)
   const [wishList, setWishList] = useState(false)
 
+
   useEffect(() => {
     if (imageList.length < 1) {
       const images = ref(storage, `${category}/${id}/images`)
-      listAll(images).then(res => res.items.forEach(image => {
+      listAll(images).then(res => {
+        res.items.forEach(image => {
         getDownloadURL(image).then(res => {
           setImageList((prev) => [...prev, res])
         })
-      }))
+      })}).catch(err=> console.log(err))
 
       const videos = ref(storage, `${category}/${id}/videos`)
       listAll(videos).then(res => res.items.forEach(image => {
@@ -75,7 +78,7 @@ const Productpage = () => {
 
 
   const addTofavourite = () => {
-    updateDoc(doc(db, 'signed users', user.uid), {
+    updateDoc(doc(db, 'signedUsers', user.uid), {
       favourites: arrayUnion({ id: id, data: data, category: category })
     })
 
@@ -83,7 +86,7 @@ const Productpage = () => {
 
 
   const addTowWishList = () => {
-    updateDoc(doc(db, 'signed users', user.uid), {
+    updateDoc(doc(db, 'signedUsers', user.uid), {
       wishList: arrayUnion({ id: id, data: data, category: category })
     })
   }

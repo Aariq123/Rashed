@@ -52,60 +52,21 @@ body{
     height: 400px;
 }
 
-.one{
-    width:190px;
-    height: 250px;
-    left: 0;
-    top: 10%;
-    transform: rotate(-18deg);
-}
-
-.two{
-    width: 205px;
-    height: 225px;
-    left: 45%;
-    top: 20%;
-    transform: rotate(18deg);
-}
-
-.three{
-    width: 220px;
-    height: 260px;
-    bottom: -20%;
-    left: 10% ;
-    transform: rotate(10deg);
+/*
+.home-img{
+  height: 240px;
 }
 
 
-
-@media (max-width:900px) {
-    .glasses.two{
-        display: none;
-    } 
+@media (max-width:1285px) {
+  .home-img{
+    height: 210px;
+  }  
 }
 
-
-@media (max-width:767px) {
-    .watches.one{
-        display: none;
-    }
-
-    .watches.two{
-        height: 235px;
-        left: 20%;
-        transform: rotate(-18deg);
-    }
-
-    .watches{
-        height: 200px;
-        width: 180px;
-    }
-    .watches.three{
-        height: 215px;
-    }
-
-    .glasses{
-        width: 180px;
-        height: 210px;
-    }
+@media (max-width:1030px) {
+  .home-img{
+  
+  }  
 }
+*/
