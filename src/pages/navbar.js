@@ -12,7 +12,7 @@ const Navbar = () => {
     const { menuOpen, openMenu, setMenuOpen, cartItem, matches, user } = useContext(MainContext)
 
     return (
-        <div className='bg-white absolute top-0 w-screen z-20 border-b-1 border-gray-200'>
+        <div className='bg-white absolute top-0 w-screen z-20'>
             <div className='nav container m-auto'>
                 <div className='w-full flex justify-between items-center'>
                     <div >

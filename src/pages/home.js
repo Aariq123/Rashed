@@ -13,26 +13,25 @@ const Home = () => {
     return (
         <div>
             <div className="container m-auto">
-                <div className="h-screen flex justify-start sm:justify-center items-center overflow-x-hidden">
-                    <div className="ml-2 sm:mr-6">
-                        <h1 className="text-lg sm:text-2xl mb-4">Looking for unique watches?</h1>
-                        <Link to='/watches'><DefaultButton text='See all watches'></DefaultButton></Link>
+                <div className="m-auto sm:p-0 md:px-8 w-full mt-24 text-center flex flex-wrap justify-center overflow-x-hidden">
+                    <div className="md:w-5/12 lg:w-4/12 m-2 sm:m-8 md:m-6">
+                        <Link to='/watches'>
+                            <img className="rounded-xl" src={require('../resources/menswatch.jpg')}></img>
+                            <p className="text-base sm:text-lg md:text-xl ">MEN'S WATCH</p>
+                        </Link>
                     </div>
-                    <div className="relative hero-container m-0 sm:ml-6">
-                        <img className="hero-img watches one absolute" src={require('../resources/sum watch/2.jpg')} alt="" />
-                        <img className="hero-img watches two absolute" src={require('../resources/sum watch/home.jpg')} alt="" />
-                        <img className="hero-img watches three absolute" src={require('../resources/sum watch/3.jpg')} alt="" />
+                    <div className="md:w-5/12 lg:w-4/12 m-2 sm:m-8 md:m-6">
+                        <Link to='/watches'>
+                            <img className="rounded-xl" src={require('../resources/womenswatch.jpg')}></img>
+                            <p className="text-base sm:text-lg md:text-xl ">WOMEN'S WATCH</p>
+                        </Link>
                     </div>
-                </div>
-                <div className="mb-24 sm:m-0 sm:h-screen flex justify-center items-center">
-                    <div className="relative hero-container ml-6">
-                        <img className="hero-img glasses one absolute" src={require('../resources/glass 1/1.jpg')} alt="" />
-                        <img className="hero-img glasses two absolute" src={require('../resources/glass 1/2.jpg')} alt="" />
-                        <img className="hero-img glasses three absolute" src={require('../resources/glass 1/3.jpg')} alt="" />
-                    </div>
-                    <div className="mr-6 z-10">
-                        <h1 className="text-lg sm:text-2xl mb-4">Looking for unique glasses?</h1>
-                        <Link to='/glasses'><DefaultButton text='See all glasses'></DefaultButton></Link>
+                    <div className="md:w-5/12 lg:w-4/12 m-2 sm:m-8 md:m-6">
+                        <Link to='/glasses'>
+                            <img className=" rounded-xl" src={require('../resources/glass.jpg')}></img>
+                            <p className="text-base sm:text-lg md:text-xl ">GLASS</p>
+                        </Link>
+
                     </div>
                 </div>
             </div>

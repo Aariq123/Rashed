@@ -14,6 +14,7 @@ const Watches = () => {
     const [products, setProducts] = useState([])
     const storage = getStorage();
     const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
     const [priceShort, setPriceShort] = useState('Low to high')
    
 
@@ -25,7 +26,13 @@ const Watches = () => {
                 docs.forEach(doc => {
                     setProducts((prev) => [...prev, { id: doc.id, data: doc.data() }])
                 })
-            }).then(() => setLoading(false))
+            }).then((res) => {
+                setLoading(false)
+                setError(false)
+            }).catch(err=>{
+                setLoading(false)
+                setError(true)
+            })
         }
     }, [])
 
@@ -87,6 +94,7 @@ const Watches = () => {
                 </div>}
             <div className="flex flex-wrap  mt-12 justify-center">
                 {loading && <p className="text-2xl mt-10">Loading.....</p>}
+                {error && <p className="text-xl mt-16">Sorry, an unknown error occured!</p>}
                 {
                     products.map((product, i) => {
                         const { name, price, stock } = product.data

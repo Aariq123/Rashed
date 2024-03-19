@@ -27,6 +27,7 @@ const UserPage = () => {
         if (logInEmail !== '' && logInPassword !== '') {
             signInWithEmailAndPassword(auth, logInEmail, logInPassword).then(res => {
                 setUser(res.user)
+                console.log(res)
                 getDoc(doc(db, 'signedUsers', res.user.uid))
                     .then((res) => {
                         setUserDetails(res.data())
@@ -40,8 +41,7 @@ const UserPage = () => {
     }
 
     const date = new Date()
-
-    console.log(date.getDate(), date.getMonth(), date.getFullYear())
+    
 
     const signUp = () => {
         if (signUpEmail !== '' && signUpPassword !== '' && setSignUpName !== '') {
@@ -51,7 +51,6 @@ const UserPage = () => {
                 const date = new Date()
                 createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
                     .then(res => {
-                        console.log(res)
                         setUser(res.user)
                         setDoc(doc(db, 'signedUsers', res.user.uid), {
                             userId:res.user.uid,
@@ -93,6 +92,12 @@ const UserPage = () => {
         console.log(userDetails.favourites)
         updateDoc(doc(db, 'signedUsers', user.uid), {
             favourites: arrayRemove(product)
+        })
+    }
+
+    const removeFromWishlist = (product) => {
+        updateDoc(doc(db, 'signedUsers', user.uid), {
+            wishList: arrayRemove(product)
         })
     }
 
@@ -171,7 +176,7 @@ const UserPage = () => {
                                                     <p className="text-xs sm:text-sm md:text-base font-bold">{name}</p>
                                                     <p className="text-xs sm:text-sm md:text-base mt-2">৳{price}</p>
                                                 </div>
-                                                <Button sx={{ height: 26 }} variant="outlined" color="error">Remove</Button>
+                                                <Button onClick={()=> removeFromWishlist(product)} sx={{ height: 26 }} variant="outlined" color="error">Remove</Button>
                                             </div>
                                         )
                                     })
