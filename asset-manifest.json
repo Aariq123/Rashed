@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/rashed/static/css/main.41594771.css",
-    "main.js": "/rashed/static/js/main.9eae53b6.js",
+    "main.css": "/rashed/static/css/main.f52ce545.css",
+    "main.js": "/rashed/static/js/main.a66295e6.js",
     "static/media/ligma.jpg": "/rashed/static/media/ligma.7e2d304e7f25746e3e4e.jpg",
     "static/media/menswatch.jpg": "/rashed/static/media/menswatch.7da1bc4f1ddcc0d0d514.jpg",
     "static/media/womenswatch.jpg": "/rashed/static/media/womenswatch.7d5cca0e79b7f40abc14.jpg",
     "static/media/glass.jpg": "/rashed/static/media/glass.3e1c30c6e40479c3a163.jpg",
     "index.html": "/rashed/index.html",
-    "main.41594771.css.map": "/rashed/static/css/main.41594771.css.map",
-    "main.9eae53b6.js.map": "/rashed/static/js/main.9eae53b6.js.map"
+    "main.f52ce545.css.map": "/rashed/static/css/main.f52ce545.css.map",
+    "main.a66295e6.js.map": "/rashed/static/js/main.a66295e6.js.map"
   },
   "entrypoints": [
-    "static/css/main.41594771.css",
-    "static/js/main.9eae53b6.js"
+    "static/css/main.f52ce545.css",
+    "static/js/main.a66295e6.js"
   ]
 }
