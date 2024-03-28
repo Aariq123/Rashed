@@ -1,6 +1,6 @@
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, NavLink } from 'react-router-dom';
-
+import { Badge } from '@mui/material';
 import { useContext, useDebugValue } from 'react';
 import { MainContext } from '../context';
 import { Avatar, Button, IconButton } from '@mui/material';
@@ -9,7 +9,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { deepOrange } from '@mui/material/colors';
 
 const Navbar = () => {
-    const { menuOpen, openMenu, setMenuOpen, cartItem, matches, user } = useContext(MainContext)
+    const { menuOpen, openMenu, setMenuOpen, items, matches, user } = useContext(MainContext)
 
     return (
         <div className='bg-white absolute top-0 w-screen z-20'>
@@ -30,7 +30,13 @@ const Navbar = () => {
                     </div>
 
                     <div className='flex items-center'>
-                        <NavLink className='mr-4 gay py-6 pl-4 md:p-0 relative' to='/cart'><ShoppingCartIcon fontSize={matches ? 'medium' : 'small'}></ShoppingCartIcon><p className='text-center absolute left-7 md:left-2/4 bottom-10 md:bottom-4 border-2 h-6 w-6  rounded-full'>{cartItem.length}</p></NavLink>
+                        {//<NavLink className='mr-4 gay py-6 pl-4 md:p-0 relative' to='/cart'><ShoppingCartIcon fontSize={matches ? 'medium' : 'small'}></ShoppingCartIcon><p className='text-center absolute left-7 md:left-2/4 bottom-10 md:bottom-4 border-2 h-6 w-6  rounded-full'>{cartItem.length}</p></NavLink>
+                        }<NavLink className='mr-4 gay py-6 pl-4 md:p-0 relative' to='/cart'>
+                            <Badge color='secondary' badgeContent={items.length}>
+                                <ShoppingCartIcon fontSize={matches ? 'medium' : 'small'}>
+                                </ShoppingCartIcon>
+                            </Badge>
+                        </NavLink>
                         <NavLink className='m-0 sm:mx-6 py-6 border-t-2 border-slate-200 md:border-none pl-4 md:p-0' to='/userpage'><Avatar sx={{ height: 25, width: 25, bgcolor: user !== null && deepOrange[500], fontSize: 16 }}></Avatar></NavLink>
                         <div onClick={openMenu} className={menuOpen ? 'hidden' : 'block md:hidden ml-6 mr-4'}>
                             <MenuIcon fontSize={matches ? 'large' : 'medium'}></MenuIcon>
