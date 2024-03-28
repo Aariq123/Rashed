@@ -17,19 +17,19 @@ function App() {
   const { closeMenu } = useContext(MainContext)
 
   return (
-    <div className="App" onClick={(e)=>closeMenu(e)}>
-      <Navbar></Navbar>
-      <Routes>
-        <Route path="/" element={<Home></Home>}></Route>
-        <Route path="/watches" element={<Watches></Watches>}></Route>
-        <Route path="/glasses" element={<Glasses></Glasses>}></Route>
-        <Route path="/contact" element={<Contact></Contact>}></Route>
-        <Route path="/productpage" element={<Productpage></Productpage>}></Route>
-        <Route path="/cart" element={<Cart></Cart>}></Route>
-        <Route path="/userpage" element={<UserPage></UserPage>}></Route>
-      </Routes>
-      <Footer></Footer>
-    </div>
+      <div className="App" onClick={(e) => closeMenu(e)}>
+        <Navbar></Navbar>
+        <Routes>
+          <Route path="/" element={<Home></Home>}></Route>
+          <Route path="/watches" element={<Watches></Watches>}></Route>
+          <Route path="/glasses" element={<Glasses></Glasses>}></Route>
+          <Route path="/contact" element={<Contact></Contact>}></Route>
+          <Route path="/productpage" element={<Productpage></Productpage>}></Route>
+          <Route path="/cart" element={<Cart></Cart>}></Route>
+          <Route path="/userpage" element={<UserPage></UserPage>}></Route>
+        </Routes>
+        <Footer></Footer>
+      </div>
   );
 }
 

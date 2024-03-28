@@ -1,15 +1,16 @@
 import { useContext, useEffect, useState } from "react";
+import { Button, Card, CardMedia } from "@mui/material";
 import { MainContext } from "../context";
 import { getDownloadURL, listAll, getStorage, ref } from "firebase/storage";
-import { Button, Card, CardMedia } from "@mui/material";
 import { collection, getDocs } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 
 
+
 const Watches = () => {
-    const { db, addCartItem, matches2, matches } = useContext(MainContext)
+    const { db, matches2, matches, addItem } = useContext(MainContext)
     const [images, setImages] = useState([])
     const [products, setProducts] = useState([])
     const storage = getStorage();
@@ -113,8 +114,8 @@ const Watches = () => {
                                     </Link>
                                     <div className="p-2 pb-4 pt-0">
                                         <Link to='/productpage' state={{ data: product.data, id: product.id, category: 'watches' }}>
-                                            <p className="text-xs sm:text-sm md:text-base font-bold">{name}</p>
-                                            <p className="text-xs sm:text-sm md:text-base my-2">৳{price}</p>
+                                            <p className=" text-xs md:text-base font-bold">{name}</p>
+                                            <p className=" text-xs md:text-base my-2">৳{price}</p>
 
                                         </Link>
                                         <Button sx={{
@@ -123,7 +124,8 @@ const Watches = () => {
                                             fontSize: matches2 ? 14 : 10, paddingX: 1,
                                             height:matches ? 24 : 20
                                         }}
-                                            onClick={() => addCartItem({ id: product.id, data: product.data, image: img.length > 0 && img[0].res, quantity: 1, category: 'watches' })}
+                                          onClick={() => addItem({ id: product.id, name:product.data.name, price:product.data.price, stock:product.data.stock, image: img.length > 0 && img[0].res, category: 'watches' }, 1)}
+                                           
                                             variant="contained">
                                             Add to cart
                                         </Button>

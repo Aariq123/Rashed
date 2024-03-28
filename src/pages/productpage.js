@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { MainContext } from "../context";
 import { useLocation } from "react-router-dom";
-import { IconButton } from "@mui/material";
+import { IconButton, Button } from "@mui/material";
 import { getDownloadURL, listAll, getStorage, ref } from "firebase/storage";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -11,10 +11,10 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-import DefaultButton from "./button";
+
 
 const Productpage = () => {
-  const { addCartItem, matches, userDetails, user, db } = useContext(MainContext)
+  const { addItem, matches, userDetails, user, db, matches2 } = useContext(MainContext)
   const location = useLocation()
   const { data, id, category } = location.state
   const storage = getStorage();
@@ -36,10 +36,11 @@ const Productpage = () => {
       const images = ref(storage, `${category}/${id}/images`)
       listAll(images).then(res => {
         res.items.forEach(image => {
-        getDownloadURL(image).then(res => {
-          setImageList((prev) => [...prev, res])
+          getDownloadURL(image).then(res => {
+            setImageList((prev) => [...prev, res])
+          })
         })
-      })}).catch(err=> console.log(err))
+      }).catch(err => console.log(err))
 
       const videos = ref(storage, `${category}/${id}/videos`)
       listAll(videos).then(res => res.items.forEach(image => {
@@ -93,17 +94,6 @@ const Productpage = () => {
 
 
 
-  const stockOrNot = () => {
-    if (data.stock > 0) {
-      if (category == 'glasses') {
-        addCartItem({ id: id, data: data, image: imageList[0], category, quantity: amount, leftEye, rightEye })
-      } else {
-        addCartItem({ id: id, data: data, image: imageList[0], category, quantity: amount })
-      }
-    }
-  }
-
-
   useEffect(() => {
     if (userDetails) {
       if (userDetails.favourites.find(item => (item.category == category, item.id == id)) !== undefined) {
@@ -120,7 +110,7 @@ const Productpage = () => {
     }
   }, [userDetails, userDetails])
 
-  
+
   return (
     <div onClick={(e) => fullscreenOff(e.target)}>
       {<div className={`absolute top-0 flex flex-col justify-center items-center left-0 overflow-hidden z-40 w-screen h-screen ${fullscreen == '' ? 'hidden' : ''}`}>
@@ -151,11 +141,32 @@ const Productpage = () => {
                 <div className="flex flex-col">
                   <div className="flex mt-2 items-center">
                     <div className="flex items-center inline-block border-2 border-black mr-2">
-                      <IconButton sx={{ height: matches ? 14 : 5, paddingX: 1, paddingY: matches? 1: 0}} onClick={() => toggleAmount('minus')}><RemoveIcon></RemoveIcon></IconButton>
+                      <IconButton sx={{ height: matches ? 14 : 5, paddingX: 1, paddingY: matches ? 1 : 0 }} onClick={() => toggleAmount('minus')}><RemoveIcon></RemoveIcon></IconButton>
                       <div className="text-xl px-2">{amount}</div>
-                      <IconButton sx={{ fontSize: matches ? 14 : 10, paddingX: 1, paddingY:matches ? 1 : 0 }} onClick={() => toggleAmount('plus')}><AddIcon></AddIcon></IconButton>
+                      <IconButton sx={{ fontSize: matches ? 14 : 10, paddingX: 1, paddingY: matches ? 1 : 0 }} onClick={() => toggleAmount('plus')}><AddIcon></AddIcon></IconButton>
                     </div>
-                    <DefaultButton onClick={stockOrNot} text='Add to cart'></DefaultButton>
+                    <Button sx={{
+                      backgroundColor: 'black',
+                      color: 'white',
+                      fontSize: matches2 ? 14 : 10,
+                      paddingX: 1,
+                      height: matches ? 30 : 26,
+                      ":hover": {
+                        backgroundColor: 'black',
+                        color: 'white',
+                        scale: '1.01'
+                      }
+                    }}
+                    onClick={() => {
+                      if(category === 'watches'){
+                        addItem({ id, name:data.name, price:data.price, stock:data.stock, image: imageList.length > 0 && imageList[0], category: 'watches'}, amount)
+                      }else{
+                        addItem({ id, name:data.name, price:data.price, stock:data.stock, image: imageList.length > 0 && imageList[0], category: 'glasses', leftEye, rightEye}, amount)
+                      }
+                    }}
+                    >
+                      Add to cart
+                    </Button>
                   </div>
                   {userDetails &&
                     <div className="mt-4 flex">
@@ -176,7 +187,7 @@ const Productpage = () => {
                 </div>
               </div>
             </div>
-            <div className="mt-10">
+            <div className="mt-10 ml-0 sm:ml-12">
               <p className="text-2xl my-4 mx-3">Videos:</p>
               <div className="overflow-x-scroll flex justify-center max-w-96">
                 {videoList &&
