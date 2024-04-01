@@ -16,7 +16,7 @@ export const ContextProvider = ({ children }) => {
   const [menuOpen, setMenuOpen] = useState(false)
   const [user, setUser] = useState(null)
   const [userDetails, setUserDetails] = useState(null)
-  const { addItem, items, removeItem, cartTotal, setItems, updateItemQuantity } = useCart()
+  const { addItem, items, removeItem, cartTotal, setItems, updateItemQuantity, inCart } = useCart()
 
   const firebaseConfig = {
 
@@ -98,7 +98,7 @@ export const ContextProvider = ({ children }) => {
 
 
   return (
-    <MainContext.Provider value={{ user, setUser, setUserDetails, userDetails, app, addItem, setItems, removeItem, items, updateItemQuantity, cartTotal, matches, matches2, menuOpen, removeItem,  closeMenu, openMenu, setMenuOpen, storageRef, db }}>
+    <MainContext.Provider value={{ user, setUser, setUserDetails, userDetails, app, addItem, setItems, removeItem, inCart, items, updateItemQuantity, cartTotal, matches, matches2, menuOpen, removeItem,  closeMenu, openMenu, setMenuOpen, storageRef, db }}>
       {children}
     </MainContext.Provider>
   )

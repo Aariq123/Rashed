@@ -14,7 +14,7 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 
 const Productpage = () => {
-  const { addItem, matches, userDetails, user, db, matches2 } = useContext(MainContext)
+  const { addItem, matches, userDetails, user, db, matches2, inCart } = useContext(MainContext)
   const location = useLocation()
   const { data, id, category } = location.state
   const storage = getStorage();
@@ -30,6 +30,8 @@ const Productpage = () => {
   const [favourite, setFavourite] = useState(false)
   const [wishList, setWishList] = useState(false)
 
+
+  console.log(inCart(id))
 
   useEffect(() => {
     if (imageList.length < 1) {
@@ -138,6 +140,11 @@ const Productpage = () => {
                 <p className="text-xs sm:text-sm md:text-basefont-bold my-2">৳{data.price}</p>
                 <p className="text-xs sm:text-sm md:text-base text-wrap my-2">{data.description}</p>
                 {data.stock > 0 ? <p className="text-sm sm:text-base text-green-600">In stock({data.stock})</p> : <p className="text-sm sm:text-base text-red-600">Stock out</p>}
+                {inCart(id) === true &&
+                  <div className="bg-red-600 inline-block p-2 my-2">
+                    <p className="text-white">In Cart</p>
+                  </div>
+                }
                 <div className="flex flex-col">
                   <div className="flex mt-2 items-center">
                     <div className="flex items-center inline-block border-2 border-black mr-2">
@@ -157,13 +164,13 @@ const Productpage = () => {
                         scale: '1.01'
                       }
                     }}
-                    onClick={() => {
-                      if(category === 'watches'){
-                        addItem({ id, name:data.name, price:data.price, stock:data.stock, image: imageList.length > 0 && imageList[0], category: 'watches'}, amount)
-                      }else{
-                        addItem({ id, name:data.name, price:data.price, stock:data.stock, image: imageList.length > 0 && imageList[0], category: 'glasses', leftEye, rightEye}, amount)
-                      }
-                    }}
+                      onClick={() => {
+                        if (category === 'watches') {
+                          addItem({ id, name: data.name, price: data.price, stock: data.stock, image: imageList.length > 0 && imageList[0], category: 'watches' }, amount)
+                        } else {
+                          addItem({ id, name: data.name, price: data.price, stock: data.stock, image: imageList.length > 0 && imageList[0], category: 'glasses', leftEye, rightEye }, amount)
+                        }
+                      }}
                     >
                       Add to cart
                     </Button>

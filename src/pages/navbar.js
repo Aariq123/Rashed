@@ -30,8 +30,7 @@ const Navbar = () => {
                     </div>
 
                     <div className='flex items-center'>
-                        {//<NavLink className='mr-4 gay py-6 pl-4 md:p-0 relative' to='/cart'><ShoppingCartIcon fontSize={matches ? 'medium' : 'small'}></ShoppingCartIcon><p className='text-center absolute left-7 md:left-2/4 bottom-10 md:bottom-4 border-2 h-6 w-6  rounded-full'>{cartItem.length}</p></NavLink>
-                        }<NavLink className='mr-4 gay py-6 pl-4 md:p-0 relative' to='/cart'>
+                        <NavLink className='mr-4 gay py-6 pl-4 md:p-0 relative' to='/cart'>
                             <Badge color='secondary' badgeContent={items.length}>
                                 <ShoppingCartIcon fontSize={matches ? 'medium' : 'small'}>
                                 </ShoppingCartIcon>
